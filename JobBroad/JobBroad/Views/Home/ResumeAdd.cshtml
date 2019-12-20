@@ -1,0 +1,183 @@
+﻿@using JobBroad.Models
+@using Job.Entity
+@model ResumeViewModel
+@{
+    ViewBag.Title = "ResumeAdd";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="alice-bg padding-top-70 padding-bottom-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="breadcrumb-area">
+                    <h1>Add Resume</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Resume</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="alice-bg section-padding-bottom">
+    <div class="container no-gliters">
+        <div class="row no-gliters">
+            <div class="col">
+                <div class="post-container">
+                    <div class="post-content-wrapper">
+                        @using (Html.BeginForm("ResumeAdd", "Home", FormMethod.Post, new { @class = "job-post-form", enctype = "multipart/form-data" }))
+                        {
+                            <div class="basic-info-input">
+                                <h4>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                    </svg>
+                                    Add Resume
+                                </h4>
+                                <div id="details" class="row">
+                                    <label class="col-md-3 col-form-label">Give Name to Your CV </label>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            @Html.EditorFor(model => model.cv.CvName, new { @class = "form-control" })
+                                            @Html.EditorFor(model=>model.cv.CvId)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="details" class="row">
+                                    <label class="col-md-3 col-form-label">Personal Details</label>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(model => model.Seeker.empName, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(model => model.Seeker.empSurname, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(model => model.Seeker.empEmail, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(model => model.Seeker.empBirthDate, new { @type = "date" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    @Html.TextAreaFor(model => model.Seeker.empAddress, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="education" class="row">
+                                    <label class="col-md-3 col-form-label">Education</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Education.EduLevel, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label">EDUCATION 01</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Education.Branch, new { @class = "form-control" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Education.SchoolName, new { @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(model => model.Education.StartDate, new { @class = "form-control", @type = "date" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(model => model.Education.EndDate, new { @class = "form-control", @type = "date" })
+                                            </div>
+                                        </div>
+                                        <a href="~/Home/ResumeAdd" class="add-new-field">+ Add Education</a>
+                                    </div>
+                                </div>
+                                <div id="experience" class="row">
+                                    <label class="col-md-3 col-form-label">Work Experience</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.Experience.CompName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-3 col-form-label">Experience 01</label>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Company Name" name="CompName" id="CompName">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(model => model.Experience.StartDate, new {  @type = "date" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.Experience.EndDate, new {  @type = "date" })
+                                        </div>
+                                        <button type="submit" class="add-new-field">+ Add Experience</button>
+                                    </div>
+                                </div>
+                                <div id="cv" class="row form-group">
+                                    <label class="col-md-3 col-form-label">Upload CV</label>
+                                    <div class="col-md-9">
+                                        <div class="add-cv">
+                                            <input type="file">CV File<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload-cloud"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9">
+                                        <button class="button">Publish Resume</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+                    </div>
+                    <div class="post-sidebar">
+                        <h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>Navigation</h5>
+                        <ul class="sidebar-menu">
+                            <li><a href="#full-name">Full Name</a></li>
+                            <li><a href="#information">Informations</a></li>
+                            <li><a href="#about">About You</a></li>
+                            <li><a href="#education">Education</a></li>
+                            <li><a href="#experience">Work Experiance</a></li>
+                            <li><a href="#skill">Professional Skill</a></li>
+                            <li><a href="#qualification">Special Qualification</a></li>
+                            <li><a href="#portfolio">Portfolio</a></li>
+                            <li><a href="#cv">Upload CV</a></li>
+                            <li><a href="#cover">Cover Letter</a></li>
+                            <li><a href="#profile">Social Profile</a></li>
+                            <li><a href="#details">Personal Details</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

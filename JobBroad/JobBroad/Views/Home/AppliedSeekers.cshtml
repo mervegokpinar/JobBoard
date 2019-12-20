@@ -1,0 +1,90 @@
+﻿@using JobBroad.Models
+@using Job.Repository
+@model JobViewModel
+
+@{
+    ViewBag.Title = "AppliedSeekers";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@{
+    JobViewModel sm = new JobViewModel();
+
+    SeekerRepository sr = new SeekerRepository();
+    Job0Repository jr = new Job0Repository();
+    JobSeekerRepository jsr = new JobSeekerRepository();
+
+    List<JobViewModel>
+        JobModel = (from s in sr.List().ProcessResult
+                    join js in jsr.List().ProcessResult on s.empId equals js.SeekerId
+                    join j in jr.List().ProcessResult on js.JobId equals j.JobId
+                    where j.JobId == Model.Job.JobId
+                    select new JobViewModel
+                    {
+                        Job = j,
+                        Seeker = s,
+                        JobSeeker = js
+                    }).ToList();
+}
+
+
+<div class="alice-bg section-padding-bottom">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col">
+                <div class="job-listing-container">
+                    <div class="filtered-job-listing-wrapper">
+                        <div class="job-view-controller-wrapper">
+                            <div class="showing-number">
+                                <span>Showing 1–12 of 28 Jobs</span>
+                            </div>
+                        </div>
+
+                        <div class="job-filter-result">
+
+
+                            @foreach (var item in JobModel)
+                            {
+                                <div class="job-list">
+                                    <div class="thumb">
+                                       
+                                    </div>
+                                    <div class="body">
+                                        <div class="content">
+                                            <h4><a href="#">@item.Seeker.empName</a></h4>
+                                            
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="~/Home/ShowResume/@item.Seeker.empId"> Bu adayın Cv'sini görüntüle</a>
+                                    </div>
+                                </div>
+
+                            }
+
+                            <div>
+
+                            </div>
+                        </div>
+                        <div class="pagination-list text-center">
+                            <nav class="navigation pagination">
+                                <div class="nav-links">
+                                    <a class="prev page-numbers" href="#"><i class="fas fa-angle-left"></i></a>
+                                    <a class="page-numbers" href="#">1</a>
+                                    <span aria-current="page" class="page-numbers current">2</span>
+                                    <a class="page-numbers" href="#">3</a>
+                                    <a class="page-numbers" href="#">4</a>
+                                    <a class="next page-numbers" href="#"><i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

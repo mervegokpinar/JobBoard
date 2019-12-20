@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Job.Entity.JobO>
+
+@{
+    ViewBag.Title = "ListAllJob";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="alice-bg section-padding-bottom">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col">
+                <div class="job-listing-container">
+                    <div class="filtered-job-listing-wrapper">
+                        <div class="job-view-controller-wrapper">
+                            <div class="showing-number">
+                                <span>Showing 1–12 of 28 Jobs</span>
+                            </div>
+                        </div>
+                        <div class="job-filter-result">
+
+                        
+                            @foreach (var item in Model)
+                            {
+                                <div class="job-list">
+                                    <div class="thumb">
+                                        <a href="#">
+                                            <img src="~/Upload/@item.JobPhoto" class="img-fluid" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="body">
+                                        <div class="content">
+                                            <h4><a href="~/Home/JobDetail/@item.JobId" type="button">@item.JobTitle</a></h4>
+                                            <div class="info">
+                                                <span class="company"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>@item.Company.CompName</a></span>
+                                                <span class="office-location"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>@item.Location.locationName</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="more">
+                                            <div class="buttons">
+                                                <a target="_blank" href="/Home/JobDetail/@item.JobId" class="btn btn-info" style="width:100px">Show</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+
+                                </div>
+                            }
+                        </div>
+                        <div class="pagination-list text-center">
+                            <nav class="navigation pagination">
+                                <div class="nav-links">
+                                    <a class="prev page-numbers" href="#"><i class="fas fa-angle-left"></i></a>
+                                    <a class="page-numbers" href="#">1</a>
+                                    <span aria-current="page" class="page-numbers current">2</span>
+                                    <a class="page-numbers" href="#">3</a>
+                                    <a class="page-numbers" href="#">4</a>
+                                    <a class="next page-numbers" href="#"><i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

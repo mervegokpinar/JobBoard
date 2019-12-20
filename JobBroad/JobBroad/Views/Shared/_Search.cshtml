@@ -1,0 +1,28 @@
+﻿@using JobBroad.Models
+@model SearchModel
+
+       <div class="searchAndFilter-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="searchAndFilter-block">
+                            <div class="searchAndFilter">
+                                @using (Html.BeginForm("SearchJob", "Home", FormMethod.Post, new { @class = "search-form", enctype = "multipart/form-data" }))
+                                {
+                                    @Html.EditorFor(model => model.keyword, new { htmlAttributes = new { placeholder = "Enter Keyword" } })
+                                    @Html.EditorFor(model => model.Location.locationName, new { htmlAttributes = new { placeholder = "Enter Location" } })
+                                    if (String.IsNullOrEmpty(ViewBag.CurrentUser))
+                                    {
+                                        <a href="@Url.Action("Login","Home")" class="button primary-bg">Search Job</a>
+                                    }
+                                    else
+                                    {
+                                        <button class="button primary-bg" type="submit"><i class="fas fa-search"></i>Search Job</button>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

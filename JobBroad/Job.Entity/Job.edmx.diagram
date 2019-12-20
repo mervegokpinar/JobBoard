@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f6b0c46104c447f38abea48fa9d76cba" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="CAREERModel.C_JobSeeker" Width="1.5" PointX="13.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAREERModel.CV" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAREERModel.Education" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAREERModel.sysdiagram" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAREERModel.User" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAREERModel.UserRole" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="CAREERModel.FK_CV_Education" ManuallyRouted="false" />
+        <AssociationConnector Association="CAREERModel.FK_User_UserRole" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CAREERModel.Experience" Width="1.5" PointX="8.375" PointY="9" />
+        <AssociationConnector Association="CAREERModel.FK_CV_Experience" />
+        <AssociationConnector Association="CAREERModel.FK_Experience_CV" />
+        <EntityTypeShape EntityType="CAREERModel.Company" Width="1.5" PointX="9" PointY="1.375" />
+        <EntityTypeShape EntityType="CAREERModel.JobO" Width="1.5" PointX="11.25" PointY="1.25" />
+        <EntityTypeShape EntityType="CAREERModel.Location" Width="1.5" PointX="6.75" PointY="1.75" />
+        <EntityTypeShape EntityType="CAREERModel.Seeker" Width="1.5" PointX="0.75" PointY="10" />
+        <AssociationConnector Association="CAREERModel.FK__JobSeeker_Job" />
+        <AssociationConnector Association="CAREERModel.FK__JobSeeker_Seeker" />
+        <AssociationConnector Association="CAREERModel.FK_Company_Location1" />
+        <AssociationConnector Association="CAREERModel.FK_Company_User1" />
+        <AssociationConnector Association="CAREERModel.FK_Job_Company" />
+        <AssociationConnector Association="CAREERModel.FK_CV_Seeker" />
+        <AssociationConnector Association="CAREERModel.FK_JobO_Location" />
+        <AssociationConnector Association="CAREERModel.FK_Seeker_Location" />
+        <AssociationConnector Association="CAREERModel.FK_Seeker_User" />
+        <AssociationConnector Association="CAREERModel.FK_JobO_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,172 @@
+﻿@using Job.Entity;
+@using Job.Common;
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @if (!String.IsNullOrEmpty(ViewBag.CurrentUser))
+    {
+        <title>@ViewBag.CurrentUser | @ViewBag.Title </title>
+    }
+    else
+    {
+        <title>Job Broad</title>
+    }
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/themify-icons.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/et-line.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/plyr.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/flag.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/slick.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/jquery.nstSlider.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+    <link href="~/Content/https://fonts.googleapis.com/css?family=Poppins:400,500,600%7CRoboto:300i,400,500" rel="stylesheet">
+    <link rel="icon" href="~/Content/images/favicon.png">
+    <link rel="apple-touch-icon" href="~/Content/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Content/images/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Content/images/icon-114x114.png">
+</head>
+<body>
+    <header class="header-2">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header-top">
+                        <div class="logo-area">
+                            <a href="~/Home/Index"><img src="~/Content/images/logo-2.png" alt=""></a>
+                        </div>
+                        <div class="header-top-toggler">
+                            <div class="header-top-toggler-button"></div>
+                        </div>
+                        <div class="top-nav" style="display: flex;">
+                            <div class="dropdown header-top-account login-modals">
+                                @if (String.IsNullOrEmpty(ViewBag.CurrentUser))
+                                {                    
+                                    <a type="button" href="@Url.Action("Register","Home")" class="account-page-link">Register</a>
+                                    <a type="button" href="@Url.Action("Login","Home")" class="account-page-link">Login</a>
+                                }
+                                @if (!String.IsNullOrEmpty(ViewBag.CurrentUser))
+                                {
+                                    <a href="@Url.Action("LogOut","Home") " class="account-page-link">Logout</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="navbar navbar-expand-lg cp-nav-2">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                @if (!String.IsNullOrEmpty(ViewBag.UserRole))
+                                {
+                                    if (ViewBag.UserRole == "1")
+                                    {
+                                        <li class="menu-item dropdown">
+                                            <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Jobs</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="menu-item"><a href="~/Home/ListAllJob">All Jobs</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item dropdown">
+                                            <a href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Dashboard</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="menu-item dropdown">
+                                                    <a href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Candidate Dashboard</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="menu-item"><a href="~/Content/dashboard.html">Dashboard</a></li>
+                                                        <li class="menu-item"><a href="~/Content/dashboard-edit-profile.html">Edit Profile</a></li>
+                                                        <li class="menu-item"><a href="~/Home/ResumeAdd">Add Resume</a></li>
+                                                        <li class="menu-item"><a href="~/Content/resume.html">Resume</a></li>
+                                                        <li class="menu-item"><a href="~/Content/edit-resume.html">Edit Resume</a></li>
+                                                        <li class="menu-item"><a href="~/Content/dashboard-bookmark.html">Bookmarked</a></li>
+                                                        <li class="menu-item"><a href="~/Home/AppliedJobList/@ViewBag.UserId">Applied</a></li>
+                                                        <li class="menu-item"><a href="~/Content/dashboard-pricing.html">Pricing</a></li>
+                                                        <li class="menu-item"><a href="~/Content/dashboard-message.html">Message</a></li>
+                                                        <li class="menu-item"><a href="~/Content/dashboard-alert.html">Alert</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
+
+                                    if (ViewBag.UserRole == "2")
+                                    {
+                                        <li class="menu-item dropdown">
+                                            <a title="" href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Candidates</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="menu-item"><a href="~/Content/candidate.html">Candidate Listing</a></li>
+                                                <li class="menu-item"><a href="~/Content/candidate-details.html">Candidate Details</a></li>
+                                                <li class="menu-item"><a href="~/Content/add-resume.html">Add Resume</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item dropdown">
+                                            <a title="" href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Employers</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="menu-item"><a href="~/Content/employer-listing.html">Employer Listing</a></li>
+                                                <li class="menu-item"><a href="~/Content/employer-details.html">Employer Details</a></li>
+                                                <li class="menu-item"><a href="~/Home/AddJob">Post a Job</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item dropdown">
+                                            <a href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Dashboard</a>
+                                            <ul class="dropdown-menu">
+
+                                                <li class="menu-item dropdown">
+                                                    <a href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Employer Dashboard</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="menu-item"><a href="~/Content/employer-dashboard.html">Employer Dashboard</a></li>
+                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-edit-profile.html">Edit Profile</a></li>
+                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-manage-candidate.html">Manage Candidate</a></li>
+                                                        <li class="menu-item"><a href="~/Home/PostedJobList/@ViewBag.UserId">Manage Job</a></li>
+                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-message.html">Dashboard Message</a></li>
+                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-pricing.html">Dashboard Pricing</a></li>
+                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-post-job.html">Post Job</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li class="menu-item active"><a title="Home" href="~/Home/Index">Home</a></li>
+                                }
+
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
+    <div class="newsletter-bg padding-top-90 padding-bottom-90">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6">
+                    <div class="newsletter-wrap">
+                        <h3>Newsletter</h3>
+                        <p>Get e-mail updates about our latest news and Special offers. We don’t send spam so don’t worry.</p>
+                        <form action="#" class="newsletter-form form-inline">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Email address...">
+                            </div>
+                            <button class="btn button">Submit<i class="fas fa-caret-right"></i></button>
+                            <p class="newsletter-error">0 - Please enter a value</p>
+                            <p class="newsletter-success">Thank you for subscribing!</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAREERModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="_JobSeeker">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="SeekerId" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompId" />
+    </Key>
+    <Property Name="CompId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CompLocationId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="CompEstDate" Type="date" />
+    <Property Name="CompUserId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="CompPhoto" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CV">
+    <Key>
+      <PropertyRef Name="CvId" />
+    </Key>
+    <Property Name="CvId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CvName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CvExpId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="CvEduId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Education">
+    <Key>
+      <PropertyRef Name="EduId" />
+    </Key>
+    <Property Name="EduId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EduLevel" Type="nvarchar" MaxLength="50" />
+    <Property Name="SchoolName" Type="nvarchar" MaxLength="255" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="Branch" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Experience">
+    <Key>
+      <PropertyRef Name="ExpId" />
+    </Key>
+    <Property Name="ExpId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompName" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="PozitionName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ExpDetail" Type="nvarchar(max)" />
+    <Property Name="CvID" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="JobO">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="JobPosition" Type="nvarchar" MaxLength="50" />
+    <Property Name="JobDetail" Type="nvarchar" MaxLength="50" />
+    <Property Name="JobLocationId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="JobCompId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="JobPhoto" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="locationId" />
+    </Key>
+    <Property Name="locationId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="locationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Seeker">
+    <Key>
+      <PropertyRef Name="empId" />
+    </Key>
+    <Property Name="empId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="empUserId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="empName" Type="nvarchar" MaxLength="50" />
+    <Property Name="empSurname" Type="nvarchar" MaxLength="50" />
+    <Property Name="empEmail" Type="nvarchar" MaxLength="50" />
+    <Property Name="empPhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="empAddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="empCvId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="empMainJob" Type="nvarchar" MaxLength="50" />
+    <Property Name="empMainLocation" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="empPhoto" Type="nvarchar" MaxLength="50" />
+    <Property Name="empBirthDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userPhoto" Type="nvarchar" MaxLength="50" />
+    <Property Name="userName" Type="nvarchar" MaxLength="50" />
+    <Property Name="userSurname" Type="nvarchar" MaxLength="50" />
+    <Property Name="userPassword" Type="nvarchar" MaxLength="50" />
+    <Property Name="userMail" Type="nvarchar" MaxLength="50" />
+    <Property Name="userRoleId" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="userRoleId" />
+    </Key>
+    <Property Name="userRoleId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="userRole" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__JobSeeker_JobO">
+    <End Role="JobO" Type="Self.JobO" Multiplicity="0..1" />
+    <End Role="_JobSeeker" Type="Self._JobSeeker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobO">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="_JobSeeker">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JobSeeker_Seeker">
+    <End Role="Seeker" Type="Self.Seeker" Multiplicity="0..1" />
+    <End Role="_JobSeeker" Type="Self._JobSeeker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seeker">
+        <PropertyRef Name="empId" />
+      </Principal>
+      <Dependent Role="_JobSeeker">
+        <PropertyRef Name="SeekerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_Location1">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="locationId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="CompLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_User1">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="CompUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CV_Education">
+    <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
+    <End Role="CV" Type="Self.CV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Education">
+        <PropertyRef Name="EduId" />
+      </Principal>
+      <Dependent Role="CV">
+        <PropertyRef Name="CvEduId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CV_Seeker">
+    <End Role="Seeker" Type="Self.Seeker" Multiplicity="0..1" />
+    <End Role="CV" Type="Self.CV" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seeker">
+        <PropertyRef Name="empId" />
+      </Principal>
+      <Dependent Role="CV">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Experience_CV">
+    <End Role="CV" Type="Self.CV" Multiplicity="0..1" />
+    <End Role="Experience" Type="Self.Experience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CV">
+        <PropertyRef Name="CvId" />
+      </Principal>
+      <Dependent Role="Experience">
+        <PropertyRef Name="CvID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="JobO" Type="Self.JobO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompId" />
+      </Principal>
+      <Dependent Role="JobO">
+        <PropertyRef Name="JobCompId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobO_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="JobO" Type="Self.JobO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="locationId" />
+      </Principal>
+      <Dependent Role="JobO">
+        <PropertyRef Name="JobLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobO_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="JobO" Type="Self.JobO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="JobO">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Seeker_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+    <End Role="Seeker" Type="Self.Seeker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="locationId" />
+      </Principal>
+      <Dependent Role="Seeker">
+        <PropertyRef Name="empMainLocation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Seeker_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Seeker" Type="Self.Seeker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Seeker">
+        <PropertyRef Name="empUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserRole">
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="userRoleId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="userRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CAREERModelStoreContainer">
+    <EntitySet Name="_JobSeeker" EntityType="Self._JobSeeker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CV" EntityType="Self.CV" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Experience" EntityType="Self.Experience" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobO" EntityType="Self.JobO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Seeker" EntityType="Self.Seeker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__JobSeeker_JobO" Association="Self.FK__JobSeeker_JobO">
+      <End Role="JobO" EntitySet="JobO" />
+      <End Role="_JobSeeker" EntitySet="_JobSeeker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__JobSeeker_Seeker" Association="Self.FK__JobSeeker_Seeker">
+      <End Role="Seeker" EntitySet="Seeker" />
+      <End Role="_JobSeeker" EntitySet="_JobSeeker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_Location1" Association="Self.FK_Company_Location1">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_User1" Association="Self.FK_Company_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CV_Education" Association="Self.FK_CV_Education">
+      <End Role="Education" EntitySet="Education" />
+      <End Role="CV" EntitySet="CV" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CV_Seeker" Association="Self.FK_CV_Seeker">
+      <End Role="Seeker" EntitySet="Seeker" />
+      <End Role="CV" EntitySet="CV" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Experience_CV" Association="Self.FK_Experience_CV">
+      <End Role="CV" EntitySet="CV" />
+      <End Role="Experience" EntitySet="Experience" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Company" Association="Self.FK_Job_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="JobO" EntitySet="JobO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobO_Location" Association="Self.FK_JobO_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="JobO" EntitySet="JobO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobO_User" Association="Self.FK_JobO_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="JobO" EntitySet="JobO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Seeker_Location" Association="Self.FK_Seeker_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="Seeker" EntitySet="Seeker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Seeker_User" Association="Self.FK_Seeker_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Seeker" EntitySet="Seeker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
+      <End Role="UserRole" EntitySet="UserRole" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

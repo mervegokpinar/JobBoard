@@ -1,0 +1,98 @@
+﻿@using Job.Entity;
+@using JobBroad.Models
+@using Job.Repository
+
+@model JobViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@{
+    JobViewModel sm = new JobViewModel();
+    Job0Repository jr = new Job0Repository();
+}
+
+
+<div>
+    @ViewBag.WarnNull
+</div>
+<div class="banner banner-1 banner-1-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="banner-content">
+                    <h1>@ViewBag.TotalJob Job Listed</h1>
+                    <p>Create free account to find thousands Jobs, Employment &amp; Career Opportunities around you!</p>
+                    @if (String.IsNullOrEmpty(ViewBag.CurrentUser))
+                    {
+                        <a href="@Url.Action("Register","Home")" class="button">Upload Resume</a>
+                    }
+                    else
+                    {
+                        <a href="~/Home/ResumeAdd" class="button">Upload Resume</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("_Search")
+<div class="section-padding-bottom alice-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+              <center><h4>RECENT JOBS</h4></center>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="recent" role="tabpanel" aria-labelledby="recent-tab">
+                        @foreach (var item in jr.GetLatestObj(5).ProcessResult)
+                        {
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="job-list half-grid">
+                                        <div class="thumb">
+                                            <a href="#">
+                                                <img src="~/Upload/@item.JobPhoto" class="img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="body">
+                                            <div class="content">
+                                                <h4><a href="job-details.html">@item.JobTitle</a></h4>
+                                                <div class="info">
+                                                    <span class="company"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>@item.Company.CompName</a></span>
+                                                    <span class="office-location"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>@item.Location.locationName</a></span>
+                                                </div>
+                                            </div>
+                                            <div class="button-area">
+                                                <a href="~/Home/JobDetail/@item.JobId">View Job</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/assets/js/jquery.min.js"></script>
+<script src="~/Content/assets/js/popper.min.js"></script>
+<script src="~/Content/assets/js/bootstrap.min.js"></script>
+<script src="~/Content/assets/js/feather.min.js"></script>
+<script src="~/Content/assets/js/bootstrap-select.min.js"></script>
+<script src="~/Content/assets/js/jquery.nstSlider.min.js"></script>
+<script src="~/Content/assets/js/owl.carousel.min.js"></script>
+<script src="~/Content/assets/js/visible.js"></script>
+<script src="~/Content/assets/js/jquery.countTo.js"></script>
+<script src="~/Content/assets/js/chart.js"></script>
+<script src="~/Content/assets/js/plyr.js"></script>
+<script src="~/Content/assets/js/tinymce.min.js"></script>
+<script src="~/Content/assets/js/slick.min.js"></script>
+<script src="~/Content/assets/js/jquery.ajaxchimp.min.js"></script>
+<script src="https://kit.fontawesome.com/9b89592cfa.js" crossorigin="anonymous"></script>
+<script src="~/Content/assets/js/custom.js"></script>
