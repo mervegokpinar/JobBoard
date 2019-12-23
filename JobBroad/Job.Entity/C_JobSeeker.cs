@@ -18,7 +18,6 @@ namespace Job.Entity
         public Nullable<decimal> JobId { get; set; }
         public Nullable<decimal> SeekerId { get; set; }
     
-        public virtual JobO JobO { get; set; }
         public virtual Seeker Seeker { get; set; }
     }
 }

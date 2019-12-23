@@ -9,7 +9,7 @@ namespace JobBroad.Models
 {
     public class JobViewModel
     {
-        public JobO Job { get; set; }       
+        public Location Location { get; set; }
         public IEnumerable<SelectListItem> LocationList { get; set; }
         public Company Company { get; set; }
         public C_JobSeeker jobSeeker { get; set; }
@@ -18,6 +18,7 @@ namespace JobBroad.Models
         public Seeker Seeker { get; set; }
         public IEnumerable<C_JobSeeker> JobSeekerList { get; set; }
         public IEnumerable<JobO> JobList { get; set; }
+        public JobO Job { get; set; }
 
     }
 }

@@ -127,6 +127,10 @@
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\dashboard\css\dashboard.css" />
+    <Content Include="Content\dashboard\js\dashboard.js" />
+    <Content Include="Content\dashboard\js\datePicker.js" />
+    <Content Include="Content\dashboard\js\upload-input.js" />
     <Content Include="Content\home-1.html" />
     <Content Include="Content\home-3.html" />
     <Content Include="Content\images\banner-3-bg.jpg" />
@@ -294,7 +298,6 @@
     <Content Include="Views\Home\ResumeAdd.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\AddJob.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Home\FilteredJob.cshtml" />
     <Content Include="Views\Home\SearchJob.cshtml" />
@@ -303,6 +306,10 @@
     <Content Include="Views\Home\AppliedSeekers.cshtml" />
     <Content Include="Views\Home\ShowResume.cshtml" />
     <Content Include="Views\Home\JobDetail.cshtml" />
+    <Content Include="Views\Home\EditJob.cshtml" />
+    <Content Include="Views\Home\AddJob.cshtml" />
+    <Content Include="Views\Home\ListCandidate.cshtml" />
+    <Content Include="Views\Home\EditProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

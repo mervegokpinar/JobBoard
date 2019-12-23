@@ -8,7 +8,7 @@ using Job.Common;
 using Job.Repository;
 using JobBroad.Models;
 using JobBroad.Models.VM;
-
+using System.IO;
 
 namespace JobBroad.Controllers
 {
@@ -41,39 +41,61 @@ namespace JobBroad.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User u)
+        public ActionResult Register(User u, HttpPostedFileBase photo)
         {
             InstanceResult<User> resultt = new InstanceResult<User>();
             UserRepository ur = new UserRepository();
             CompanyRepository cr = new CompanyRepository();
             SeekerRepository sr = new SeekerRepository();
+            string photoPath = "";
 
-            resultt.resultint = ur.Insert(u);
-            Session["User"] = ur.GetLatestObj(1).ProcessResult[0];
-            if (resultt.resultint.IsSucceeded)
+            if (photo != null)
             {
-                if (((User)Session["User"]).userRoleId==1)
+                if (photo.ContentLength > 0)
                 {
-                    Seeker s = new Seeker();
-                    s.empUserId = ((User)Session["User"]).userId;
-                    s.empName= ((User)Session["User"]).userName;
-                    s.empSurname= ((User)Session["User"]).userSurname;
-                    sr.Insert(s);
+                    photoPath = Guid.NewGuid().ToString().Replace("-", "") + ".jpg";
+                    string path = Server.MapPath("~/Upload/" + photoPath);
+                    photo.SaveAs(path);
+
                 }
-                if (((User)Session["User"]).userRoleId == 2)
+               
+                u.userPhoto = photoPath;
+                resultt.resultint = ur.Insert(u);
+                Session["User"] = ur.GetLatestObj(1).ProcessResult[0];
+                if (resultt.resultint.IsSucceeded)
                 {
-                    Company c = new Company();
-                    c.CompUserId= ((User)Session["User"]).userId;
-                    c.CompName = ((User)Session["User"]).userName;
-                    cr.Insert(c);
+                    if (((User)Session["User"]).userRoleId == 1)
+                    {
+                        Seeker s = new Seeker();
+                        s.empUserId = ((User)Session["User"]).userId;
+                        s.empName = ((User)Session["User"]).userName;
+                        s.empSurname = ((User)Session["User"]).userSurname;
+                        s.empEmail = ((User)Session["User"]).userMail;
+                        s.empPhoto = ((User)Session["User"]).userPhoto;
+                        sr.Insert(s);
+                    }
+                    if (((User)Session["User"]).userRoleId == 2)
+                    {
+                        Company c = new Company();
+                        c.CompUserId = ((User)Session["User"]).userId;
+                        c.CompName = ((User)Session["User"]).userName;
+                        c.CompPhoto = ((User)Session["User"]).userPhoto;
+                        cr.Insert(c);
+                    }
+
+                    ViewBag.SignIn = "Your account has been sucessfully created ! Please Sign In.";
+                    return View("Login");
                 }
 
-                ViewBag.SignIn = "Your account has been sucessfully created ! Please Sign In.";
-                return View("Login");
+                ViewBag.UserRole = Request.Cookies["UserRole"].Value;
+                ViewBag.SignIn = "Please try again !";
+                return View();
             }
-            ViewBag.UserRole = Request.Cookies["UserRole"].Value;
-            ViewBag.SignIn = "Please try again !";
-            return View();
+            else
+            {
+                TempData["Msg"] = "Please Upload Pictures";
+                return Redirect("~/Home/Register");
+            }
         }
         #endregion
         #region Login
@@ -84,7 +106,7 @@ namespace JobBroad.Controllers
         [HttpPost]
         public ActionResult Login(User model)
         {
-            var user = db.Users.FirstOrDefault(x => x.userName == model.userName && x.userPassword == model.userPassword);
+            var user = db.Users.FirstOrDefault(x => x.userName == model.userMail && x.userPassword == model.userPassword);
             if (user != null)
             {
                 string cookieName = "UserLogin";
@@ -116,6 +138,57 @@ namespace JobBroad.Controllers
         }
 
         #endregion
+        #region Edit Profile
+       
+        public ActionResult EditProfile(int id)
+        {
+            ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
+            ViewBag.UserRole = Request.Cookies["UserRole"].Value;
+            ViewBag.UserId = Request.Cookies["UserId"].Value;
+
+            CompanyRepository cr = new CompanyRepository();
+            InstanceResult<Company> result = new InstanceResult<Company>();
+
+            result.TResult = cr.GetObjById(id);
+            return View(result.TResult.ProcessResult);
+
+        }
+        [HttpPost]
+        public ActionResult EditProfile(Company model,HttpPostedFileBase photo)
+        {
+            InstanceResult<Company> result = new InstanceResult<Company>();
+            CompanyRepository cr = new CompanyRepository();
+            string photoName = model.CompPhoto;
+            if (photo != null)
+            {
+                if (photo.ContentLength > 0)
+                {
+                    string ext = Path.GetExtension(photo.FileName);
+                    photoName = Guid.NewGuid().ToString().Replace("-", "");
+                    if (ext == ".jpg")
+                        photoName += ext;
+                    else if (ext == ".png")
+                        photoName += ext;
+                    else if (ext == ".bmp")
+                        photoName += ext;
+                    else
+                    {
+                        ViewBag.Mesaj = "please upload photos of type .jpg,.png,.bmp ";
+
+                        return View(model);
+                    }
+                    string path = Server.MapPath("~/Upload/" + photoName);
+                    photo.SaveAs(path);
+                }
+            }
+            model.CompPhoto = photoName;
+            result.resultint = cr.Update(model);
+            if (result.resultint.IsSucceeded)
+                return RedirectToAction("ListAllJob");
+            else
+                return View(model);
+        }
+        #endregion
         #region Listing All Job
         public ActionResult ListAllJob()
         {
@@ -126,6 +199,19 @@ namespace JobBroad.Controllers
             Job0Repository jr = new Job0Repository();
             InstanceResult<JobO> result = new InstanceResult<JobO>();
             result.resultList = jr.List();
+            return View(result.resultList.ProcessResult);
+        }
+        #endregion
+        #region Listing All Candidates
+        public ActionResult ListCandidate()
+        {
+            ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
+            ViewBag.UserRole = Request.Cookies["UserRole"].Value;
+            ViewBag.UserId = Request.Cookies["UserId"].Value;
+
+            SeekerRepository sr = new SeekerRepository();
+            InstanceResult<Seeker> result = new InstanceResult<Seeker>();
+            result.resultList = sr.List();
             return View(result.resultList.ProcessResult);
         }
         #endregion
@@ -167,63 +253,60 @@ namespace JobBroad.Controllers
 
         public ActionResult AddJob()
         {
-            LocationRepository lr = new LocationRepository();
             ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
             ViewBag.UserRole = Request.Cookies["UserRole"].Value;
             ViewBag.UserId = Request.Cookies["UserId"].Value;
-            JobViewModel jwm = new JobViewModel();
-            List<SelectListItem> LocationList = new List<SelectListItem>();
-
-            foreach (Location item in lr.List().ProcessResult)
-            {
-                LocationList.Add(new SelectListItem { Value = item.locationId.ToString(), Text = item.locationName });
-            }
-            jwm.LocationList = LocationList;
-            decimal x = Convert.ToDecimal(ViewBag.UserId);
+           
+            JobO j = new JobO();
+            decimal t = Convert.ToDecimal(ViewBag.UserId);
+            Company c = db.Companies.SingleOrDefault(p => p.CompUserId == t);
+            User u= db.Users.SingleOrDefault(s => s.userId == t);
+            j.JobCompId =c.CompId; 
+            j.UserId = u.userId;
             
-            jwm.Company = db.Companies.Where(c => c.CompUserId == x).FirstOrDefault();
-            jwm.User = db.Users.Where(u => u.userId == x).FirstOrDefault();
-            return View(jwm);
+            return View(j);
         }
-
         [HttpPost]
-        public ActionResult AddJob(HttpPostedFileBase photoPath, JobViewModel j)
+        public ActionResult AddJob(JobO x, HttpPostedFileBase photo)
         {
             Job0Repository jr = new Job0Repository();
-            ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
-            ViewBag.UserRole = Request.Cookies["UserRole"].Value;
+            InstanceResult<JobO> result = new InstanceResult<JobO>();
+            JobO h = new JobO();
+
             string PhotoName = "";
-            if (photoPath != null)
+            if (photo != null)
             {
-                if (photoPath.ContentLength > 0)
+                if (photo.ContentLength > 0)
                 {
                     PhotoName = Guid.NewGuid().ToString().Replace("-", "") + ".jpg";
                     string path = Server.MapPath("~/Upload/" + PhotoName);
-                    photoPath.SaveAs(path);
+                    photo.SaveAs(path);
                 }
-                j.Job.JobPhoto = PhotoName;
-                if (ModelState.IsValid)
+
+
+                h.JobPhoto = PhotoName;
+                h.JobCompId = x.JobCompId;
+                h.UserId = x.UserId;
+                h.JobTitle = x.JobTitle;
+                h.JobDetail = x.JobDetail;
+                h.JobPosition = x.JobPosition;
+                h.JobLocationId = x.JobLocationId;
+
+                result.resultint = jr.Insert(h);
+                if (result.resultint.ProcessResult > 0)
                 {
-                    InstanceResult<JobO> resultJ = new InstanceResult<JobO>();
-                    j.Job.UserId = j.User.userId;
-                    j.Job.JobCompId = j.Company.CompId;
-                    resultJ.resultint = jr.Insert(j.Job);
-                    if (resultJ.resultint.IsSucceeded)
-                        return RedirectToAction("ListAllJob", "Home");
-                    else
-                    {
-                        return View(j);
-                    }
+                    return RedirectToAction("Index");
                 }
-                else
-                    return View();
+                return View(x);
             }
             else
             {
-                ViewBag.BrandErr = "Please Upload Pictures";
+                TempData["Msg"] = "Please Upload Pictures";
                 return Redirect("~/Home/AddJob");
             }
         }
+
+
         #endregion
         #region LogOut
         public ActionResult LogOut()
@@ -261,6 +344,48 @@ namespace JobBroad.Controllers
            
         }
 
+        #endregion
+        #region EditPostedJob
+        [HttpGet]
+        public ActionResult EditJob(int id)
+        {
+            ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
+            ViewBag.UserRole = Request.Cookies["UserRole"].Value;
+            ViewBag.UserId = Request.Cookies["UserId"].Value;
+
+            Job0Repository jr = new Job0Repository();
+            InstanceResult<JobO> result = new InstanceResult<JobO>();
+
+            result.TResult = jr.GetObjById(id);
+            return View(result.TResult.ProcessResult);
+        }
+        [HttpPost]
+        public ActionResult EditJob(JobO model)
+        {
+            ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
+            ViewBag.UserRole = Request.Cookies["UserRole"].Value;
+            ViewBag.UserId = Request.Cookies["UserId"].Value;
+            Job0Repository jr = new Job0Repository();
+            InstanceResult<JobO> result = new InstanceResult<JobO>();
+            result.resultint = jr.Update(model);
+            ViewBag.Mesaj = result.resultint.UserMessage;
+            return View();
+        }
+        #endregion
+        #region DeletePostedJob
+        public ActionResult DeleteJob(int id)
+        {
+            ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
+            ViewBag.UserRole = Request.Cookies["UserRole"].Value;
+            ViewBag.UserId = Request.Cookies["UserId"].Value;
+
+            Job0Repository jr = new Job0Repository();
+            InstanceResult<JobO> result = new InstanceResult<JobO>();
+            result.resultint = jr.Delete(id);
+
+            return RedirectToAction("Index");
+           
+        }
         #endregion
         #region Search Job
         public ActionResult SearchJob(SearchModel model)

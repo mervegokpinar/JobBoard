@@ -7,7 +7,6 @@
     <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="JobId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="SeekerId" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="JobO" Relationship="CAREERModel.FK__JobSeeker_Job" FromRole="C_JobSeeker" ToRole="JobO" />
     <NavigationProperty Name="Seeker" Relationship="CAREERModel.FK__JobSeeker_Seeker" FromRole="C_JobSeeker" ToRole="Seeker" />
   </EntityType>
   <EntityType Name="CV">
@@ -122,10 +121,6 @@
     <EntitySet Name="JobOes" EntityType="CAREERModel.JobO" />
     <EntitySet Name="Locations" EntityType="CAREERModel.Location" />
     <EntitySet Name="Seekers" EntityType="CAREERModel.Seeker" />
-    <AssociationSet Name="FK__JobSeeker_Job" Association="CAREERModel.FK__JobSeeker_Job">
-      <End Role="JobO" EntitySet="JobOes" />
-      <End Role="C_JobSeeker" EntitySet="C_JobSeeker" />
-    </AssociationSet>
     <AssociationSet Name="FK__JobSeeker_Seeker" Association="CAREERModel.FK__JobSeeker_Seeker">
       <End Role="Seeker" EntitySet="Seekers" />
       <End Role="C_JobSeeker" EntitySet="C_JobSeeker" />
@@ -226,7 +221,6 @@
     <Property Name="JobLocationId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="JobCompId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="JobPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="C_JobSeeker" Relationship="CAREERModel.FK__JobSeeker_Job" FromRole="JobO" ToRole="C_JobSeeker" />
     <NavigationProperty Name="Company" Relationship="CAREERModel.FK_Job_Company" FromRole="JobO" ToRole="Company" />
     <NavigationProperty Name="Location" Relationship="CAREERModel.FK_JobO_Location" FromRole="JobO" ToRole="Location" />
     <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
@@ -263,18 +257,6 @@
     <NavigationProperty Name="Location" Relationship="CAREERModel.FK_Seeker_Location" FromRole="Seeker" ToRole="Location" />
     <NavigationProperty Name="User" Relationship="CAREERModel.FK_Seeker_User" FromRole="Seeker" ToRole="User" />
   </EntityType>
-  <Association Name="FK__JobSeeker_Job">
-    <End Type="CAREERModel.JobO" Role="JobO" Multiplicity="0..1" />
-    <End Type="CAREERModel.C_JobSeeker" Role="C_JobSeeker" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="JobO">
-        <PropertyRef Name="JobId" />
-      </Principal>
-      <Dependent Role="C_JobSeeker">
-        <PropertyRef Name="JobId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__JobSeeker_Seeker">
     <End Type="CAREERModel.Seeker" Role="Seeker" Multiplicity="0..1" />
     <End Type="CAREERModel.C_JobSeeker" Role="C_JobSeeker" Multiplicity="*" />

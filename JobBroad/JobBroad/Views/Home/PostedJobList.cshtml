@@ -37,29 +37,35 @@
                         </div>
 
                         <div class="job-filter-result">
-
-
+                            
                             @foreach (var item in JobModel)
                             {
-                                <div class="job-list">
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img src="~/Upload/@item.Job.JobPhoto" class="img-fluid" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="body">
-                                        <div class="content">
-                                            <h4><a href="#">@item.Job.JobTitle</a></h4>
-                                            <div class="info">
-                                                <span class="company"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>@item.Job.JobDetail</a></span>
+                            <div class="job-list">
+                                <div class="thumb">
+                                    <a href="#">
+                                        <img src="~/Upload/@item.Job.JobPhoto" class="img-fluid" alt="">
+                                    </a>
+                                </div>
+                                <div class="body">
+                                    <div class="content">
+                                        <h4><a href="#">@item.Job.JobTitle</a></h4>
+                                        <div class="info">
+                                            <span class="company"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>@item.Job.JobDetail</a></span>
 
-                                            </div>
                                         </div>
                                     </div>
-                                    <div>
-                                        <a href="~/Home/AppliedSeekers/@item.Job.JobId"> Bu ilana başvuranları gör</a>
-                                    </div>
                                 </div>
+                                <div>
+                                    <a href="~/Home/AppliedSeekers/@item.Job.JobId"> Bu ilana başvuranları gör</a>
+                                </div>
+                                <div>
+                                    <a href="~/Home/EditJob/@item.Job.JobId">İlanı Düzenle</a>
+                                </div>
+                                <div>
+                                    <a href="~/Home/DeleteJob/@item.Job.JobId">İlanı Sil</a>
+                                </div>
+
+                            </div>
 
                             }
 

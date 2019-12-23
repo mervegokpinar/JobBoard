@@ -1,0 +1,75 @@
+﻿@using Job.Entity
+@using Job.Repository
+@model Company
+
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="alice-bg section-padding-bottom">
+    <div class="container no-gliters">
+        <div class="row no-gliters">
+            <div class="col">
+                <div class="dashboard-container">
+
+                    <div class="dashboard-content-wrapper">
+
+                        @using (Html.BeginForm("EditProfile", "Home", FormMethod.Post, new { @class = "login-form", enctype = "multipart/form-data" }))
+                        {
+                            @Html.TextBoxFor(model => model.CompId)                          
+                         
+                            <div class="dashboard-section upload-profile-photo">
+                                <div class="update-photo">
+                                    <img class="image" src="~/Upload/@Model.CompPhoto" alt="" style="max-height:200px; max-width:200px">
+                                </div>
+                                <div class="file-upload">
+                                    <input type="file" name="photo" id="photo" class="file-input" />Change Avatar
+                                </div>
+                            </div>
+
+                            <div class="dashboard-section basic-info-input">
+                                <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>Basic Info</h4>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Company Name</label>
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.CompName, new { @class = "form-control", @placeholder = "Company Name" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Location</label>
+                                    <div class="col-sm-9">
+                                        @{
+                                            LocationRepository lr = new LocationRepository();
+                                            List<SelectListItem> LocationList = new List<SelectListItem>();
+                                            foreach (Location item in lr.List().ProcessResult)
+                                            {
+                                                LocationList.Add(new SelectListItem { Value = item.locationId.ToString(), Text = item.locationName });
+                                            }
+                                        }
+
+                                        @Html.DropDownListFor(model => model.CompLocationId, LocationList)
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Established Date</label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(m => m.CompEstDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                    </div>
+                                </div>
+                                <button class="button" type="submit">Save Change</button>
+                            </div>
+                        }
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/Content/dashboard/css/dashboard.css" rel="stylesheet" />
+<script src="~/Content/dashboard/js/dashboard.js"></script>
+<script src="~/Content/dashboard/js/datePicker.js"></script>
+<script src="~/Content/dashboard/js/upload-input.js"></script>
+<script src="https://kit.fontawesome.com/9b89592cfa.js" crossorigin="anonymous"></script>

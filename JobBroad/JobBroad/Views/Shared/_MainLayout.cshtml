@@ -97,36 +97,28 @@
 
                                     if (ViewBag.UserRole == "2")
                                     {
+                                       
                                         <li class="menu-item dropdown">
-                                            <a title="" href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Candidates</a>
+                                            <a title="" href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Jobs</a>
                                             <ul class="dropdown-menu">
-                                                <li class="menu-item"><a href="~/Content/candidate.html">Candidate Listing</a></li>
-                                                <li class="menu-item"><a href="~/Content/candidate-details.html">Candidate Details</a></li>
-                                                <li class="menu-item"><a href="~/Content/add-resume.html">Add Resume</a></li>
+                                                <li class="menu-item"><a href="~/Home/AddJob">Post New Job</a></li>
+                                                <li class="menu-item"><a href="~/Home/PostedJobList/@ViewBag.UserId">Posted Jobs List</a></li>
                                             </ul>
                                         </li>
                                         <li class="menu-item dropdown">
-                                            <a title="" href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Employers</a>
-                                            <ul class="dropdown-menu">
-                                                <li class="menu-item"><a href="~/Content/employer-listing.html">Employer Listing</a></li>
-                                                <li class="menu-item"><a href="~/Content/employer-details.html">Employer Details</a></li>
-                                                <li class="menu-item"><a href="~/Home/AddJob">Post a Job</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item dropdown">
-                                            <a href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Dashboard</a>
+                                            <a href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Profile</a>
                                             <ul class="dropdown-menu">
 
                                                 <li class="menu-item dropdown">
                                                     <a href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Employer Dashboard</a>
                                                     <ul class="dropdown-menu">
-                                                        <li class="menu-item"><a href="~/Content/employer-dashboard.html">Employer Dashboard</a></li>
-                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-edit-profile.html">Edit Profile</a></li>
-                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-manage-candidate.html">Manage Candidate</a></li>
-                                                        <li class="menu-item"><a href="~/Home/PostedJobList/@ViewBag.UserId">Manage Job</a></li>
-                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-message.html">Dashboard Message</a></li>
-                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-pricing.html">Dashboard Pricing</a></li>
-                                                        <li class="menu-item"><a href="~/Content/employer-dashboard-post-job.html">Post Job</a></li>
+                                                        <li class="menu-item"><a href="~/Home/EditProfile/@ViewBag.UserId">Edit Profile</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="menu-item dropdown">
+                                                    <a title="" href="~/Content/#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Candidates</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="menu-item"><a href="~/Home/ListCandidate">Candidate Listing</a></li>                                                        
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -137,8 +129,6 @@
                                 {
                                     <li class="menu-item active"><a title="Home" href="~/Home/Index">Home</a></li>
                                 }
-
-
                             </ul>
                         </div>
                     </nav>

@@ -8,28 +8,40 @@
 
 
 <div class="container">
+    <div class="alert alert-info" role="alert">
+        @TempData["Msg"]
+    </div>
     <div class="row">
         <div class="col-xl-4 col-md-6">
             <div class="access-form">
                 <div class="form-header">
                     <h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>Register Account</h5>
                 </div>
-                @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+                @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-
                     <div class="account-type">
-                        <label>Kullanıcı Tipi:</label>
+                        <div>
+                            <input type="file" name="photo" id="photo" />
+                        </div>
+                    </div>
+                    <div style="height:20px">
+
+                    </div>
+                    <div class="account-type">
+                        <label>User Type:</label>
                         <span>Candidate</span> @Html.RadioButtonFor(model => model.userRoleId, "1", true)
                         <span>Employee</span> @Html.RadioButtonFor(model => model.userRoleId, "2", false)
                     </div>
-                    
-
                     <div class="form-group">
-                        <label>Kullanıcı Adı:</label>
-                        @Html.TextBoxFor(model => model.userName, new { @class = "form-control", @placeholder = "User Name" })
+                        <label>First Name:</label>
+                        @Html.TextBoxFor(model => model.userName, new { @class = "form-control", @placeholder = "Your Name" })
                     </div>
                     <div class="form-group">
-                        <label>Kullanıcı Mail:</label>
+                        <label>Last Name:</label>
+                        @Html.TextBoxFor(model => model.userSurname, new { @class = "form-control", @placeholder = "Your Surname" })
+                    </div>
+                    <div class="form-group">
+                        <label>Mail Address:</label>
                         @Html.TextBoxFor(model => model.userMail, new { @class = "form-control", @placeholder = "E-mail Address" })
                     </div>
                     <div class="form-group">

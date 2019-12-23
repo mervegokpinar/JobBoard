@@ -15,7 +15,9 @@ namespace Job.Repository
 
         public override Result<int> Delete(int id)
         {
-            throw new NotImplementedException();
+            JobO deleted = _db.JobOes.SingleOrDefault(t => t.JobId == id);
+            _db.JobOes.Remove(deleted);
+            return result.GetResult(_db);
         }
 
         public override Result<List<JobO>> GetLatestObj(int Quantity)
@@ -30,8 +32,9 @@ namespace Job.Repository
 
         public override Result<JobO> GetObjById(int id)
         {
-            
-            return result.GetT(_db.JobOes.FirstOrDefault(t => t.JobId == id));
+            JobO j = _db.JobOes.SingleOrDefault(t => t.JobId == id);
+            return result.GetT(j);
+
         }
 
         public override Result<int> Insert(JobO item)
@@ -47,7 +50,14 @@ namespace Job.Repository
 
         public override Result<int> Update(JobO item)
         {
-            throw new NotImplementedException();
+            JobO job = _db.JobOes.SingleOrDefault(t => t.JobId == item.JobId);
+            job.JobTitle = item.JobTitle;
+            job.JobPosition = item.JobPosition;
+            job.JobDetail = item.JobDetail;
+            job.JobPhoto = item.JobPhoto;
+            job.JobLocationId = item.JobLocationId;
+         
+            return result.GetResult(_db);
         }
     }
 }

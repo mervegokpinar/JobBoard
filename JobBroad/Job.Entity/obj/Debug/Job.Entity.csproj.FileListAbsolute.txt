@@ -10,3 +10,15 @@ C:\Users\mgokpinar\source\repos\JobBroad\Job.Entity\obj\Debug\Job.Entity.csproj.
 C:\Users\mgokpinar\source\repos\JobBroad\Job.Entity\obj\Debug\Job.Entity.csproj.CopyComplete
 C:\Users\mgokpinar\source\repos\JobBroad\Job.Entity\obj\Debug\Job.Entity.dll
 C:\Users\mgokpinar\source\repos\JobBroad\Job.Entity\obj\Debug\Job.Entity.pdb
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\bin\Debug\Job.Entity.dll.config
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\bin\Debug\Job.Entity.dll
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\bin\Debug\Job.Entity.pdb
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\bin\Debug\EntityFramework.dll
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\bin\Debug\EntityFramework.xml
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\obj\Debug\Job.Entity.csprojAssemblyReference.cache
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\obj\Debug\Job.Entity.csproj.CoreCompileInputs.cache
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\obj\Debug\Job.Entity.csproj.CopyComplete
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\obj\Debug\Job.Entity.dll
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\Job.Entity\obj\Debug\Job.Entity.pdb

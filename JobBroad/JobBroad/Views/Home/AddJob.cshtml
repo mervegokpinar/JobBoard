@@ -1,75 +1,81 @@
-﻿@using JobBroad.Models;
-@model JobViewModel
+﻿@using Job.Entity
+@using Job.Repository
+@model JobO
 
 @{
     ViewBag.Title = "AddJob";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
-
 <div class="alice-bg section-padding-bottom">
     <div class="container no-gliters">
         <div class="row no-gliters">
             <div class="col">
                 <div class="dashboard-container">
                     <div class="dashboard-content-wrapper">
-                        @using (Html.BeginForm("AddJob", "Home", FormMethod.Post, new { @class = "job-post-form", enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("AddJob", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
-                        <div class="dashboard-section basic-info-input">
-                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>Post A Job</h4>
-                           
-                            <div class="form-group row">
-                                @Html.LabelFor(model => model.Job.JobPhoto, htmlAttributes: new { @class = "control-label col-md-2" })
-                                @Html.TextBoxFor(model => model.Job.JobId)
-                                @Html.TextBoxFor(model => model.Seeker.empId)
-                                <div class="col-md-10">
-                                    <input type="file" name="photoPath" id="photoPath" />
-                                    @Html.ValidationMessageFor(model => model.Job.JobPhoto, "", new { @class = "text-danger" })
+                            <div class="dashboard-section basic-info-input">
+                                <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>Post A Job</h4>
+                                <div class="form-group row">
+                                    <div>
+                                        @Html.DisplayNameFor(model => model.JobPhoto)
+                                    </div>
+                                    <div>
+                                        <input type="file" name="photo" id="photo" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">Job Title</label>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.JobTitle)
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">Job Detail</label>
+                                    <div class="col-md-9">
+                                        @Html.TextAreaFor(model => model.JobDetail)
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">Job Position</label>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.JobPosition)
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 col-form-label">Job Position</label>
+                                    <div class="col-md-9">
+                                        @{
+                                            LocationRepository lr = new LocationRepository();
+                                            List<SelectListItem> LocationList = new List<SelectListItem>();
+                                            foreach (Location item in lr.List().ProcessResult)
+                                            {
+                                                LocationList.Add(new SelectListItem { Value = item.locationId.ToString(), Text = item.locationName });
+                                            }
+                                        }
+
+                                        @Html.DropDownListFor(model=>model.JobLocationId, LocationList)
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Job Title</label>
-                                <div class="col-md-9">
-                                    @Html.TextBoxFor(model => model.Job.JobTitle, new { @class = "form-control", @placeholder = "Job Title" })
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Job Position</label>
-                                <div class="col-md-9">
-                                    @Html.TextBoxFor(model => model.Job.JobPosition, new { @class = "form-control", @placeholder = "Job Position" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label class="col-md-3 col-form-label">Job Details</label>
-                                <div class="col-md-9">
-                                    @Html.TextAreaFor(model => model.Job.JobDetail, new { @class = "form-control", @placeholder = "Job Title" })
-                                </div>
-                            </div>
-                            <div>
-                                @Html.DisplayNameFor(model => model.Job.JobLocationId)
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-3 col-form-label">Job Location</label>
-                                <div class="col-md-9">
-                                    @Html.DropDownListFor(model => model.Job.JobLocationId, Model.LocationList)
-                                </div>
-                            </div>
-                           
-                            @Html.HiddenFor(model => model.Company.CompId)
-                            @Html.HiddenFor(model => model.User.userId)
-                            @*@Html.TextBoxFor(model => model.Job.JobCompId, new { @class = "form-control", @placeholder = "Job company Id" })*@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label"></label>
                                 <div class="col-md-9">
-                                    <input class="button" type="submit" value="Post Your Job" />
+                                    <button class="button" type="submit">Post Your Job</button>
                                 </div>
                             </div>
-                        </div>
+                            @Html.EditorFor(model => model.JobCompId)
+                            @Html.EditorFor(model => model.UserId)
+                            @Html.EditorFor(model => model.JobLocationId)
                         }
-                        </div>
+                    </div>
+
+
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+
 

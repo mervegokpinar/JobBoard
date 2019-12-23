@@ -118,18 +118,6 @@
     <Property Name="userRoleId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="userRole" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <Association Name="FK__JobSeeker_JobO">
-    <End Role="JobO" Type="Self.JobO" Multiplicity="0..1" />
-    <End Role="_JobSeeker" Type="Self._JobSeeker" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="JobO">
-        <PropertyRef Name="JobId" />
-      </Principal>
-      <Dependent Role="_JobSeeker">
-        <PropertyRef Name="JobId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__JobSeeker_Seeker">
     <End Role="Seeker" Type="Self.Seeker" Multiplicity="0..1" />
     <End Role="_JobSeeker" Type="Self._JobSeeker" Multiplicity="*" />
@@ -286,10 +274,6 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__JobSeeker_JobO" Association="Self.FK__JobSeeker_JobO">
-      <End Role="JobO" EntitySet="JobO" />
-      <End Role="_JobSeeker" EntitySet="_JobSeeker" />
-    </AssociationSet>
     <AssociationSet Name="FK__JobSeeker_Seeker" Association="Self.FK__JobSeeker_Seeker">
       <End Role="Seeker" EntitySet="Seeker" />
       <End Role="_JobSeeker" EntitySet="_JobSeeker" />

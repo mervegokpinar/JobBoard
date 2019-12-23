@@ -18,8 +18,8 @@
                 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
                 {
                     <div class="form-group">
-                        <label>User Name:</label><br />
-                        @Html.EditorFor(model => model.userName, new { @class = "form-group"})
+                        <label>Mail Address:</label><br />
+                        @Html.EditorFor(model => model.userMail, new { @class = "form-group"})
                     </div>
                     <div class="form-group">
                         <label>Password:</label><br />

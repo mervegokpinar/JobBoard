@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="CAREERModel.JobO" Width="1.5" PointX="11.25" PointY="1.25" />
         <EntityTypeShape EntityType="CAREERModel.Location" Width="1.5" PointX="6.75" PointY="1.75" />
         <EntityTypeShape EntityType="CAREERModel.Seeker" Width="1.5" PointX="0.75" PointY="10" />
-        <AssociationConnector Association="CAREERModel.FK__JobSeeker_Job" />
         <AssociationConnector Association="CAREERModel.FK__JobSeeker_Seeker" />
         <AssociationConnector Association="CAREERModel.FK_Company_Location1" />
         <AssociationConnector Association="CAREERModel.FK_Company_User1" />

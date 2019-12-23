@@ -30,7 +30,8 @@ namespace Job.Repository
 
         public override Result<Company> GetObjById(int id)
         {
-            throw new NotImplementedException();
+            Company c = _db.Companies.SingleOrDefault(t => t.CompUserId == id);
+            return result.GetT(c);
         }
 
         public override Result<int> Insert(Company item)
@@ -46,7 +47,13 @@ namespace Job.Repository
 
         public override Result<int> Update(Company item)
         {
-            throw new NotImplementedException();
+            Company comp = _db.Companies.SingleOrDefault(t => t.CompId == item.CompId);
+            comp.CompPhoto = item.CompPhoto;
+            comp.CompLocationId= item.CompLocationId;
+            comp.CompEstDate = item.CompEstDate;
+            comp.CompName = item.CompName;
+
+            return result.GetResult(_db);
         }
     }
 }

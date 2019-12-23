@@ -14,12 +14,6 @@ namespace Job.Entity
     
     public partial class JobO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public JobO()
-        {
-            this.C_JobSeeker = new HashSet<C_JobSeeker>();
-        }
-    
         public decimal JobId { get; set; }
         public string JobTitle { get; set; }
         public string JobPosition { get; set; }
@@ -29,8 +23,6 @@ namespace Job.Entity
         public string JobPhoto { get; set; }
         public Nullable<decimal> UserId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<C_JobSeeker> C_JobSeeker { get; set; }
         public virtual Company Company { get; set; }
         public virtual Location Location { get; set; }
         public virtual User User { get; set; }
