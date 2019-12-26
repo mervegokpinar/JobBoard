@@ -27,6 +27,7 @@ namespace Job.Entity
         public string PozitionName { get; set; }
         public string ExpDetail { get; set; }
         public Nullable<decimal> CvID { get; set; }
+        public Nullable<decimal> UserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CV> CVs { get; set; }

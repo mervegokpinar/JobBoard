@@ -24,6 +24,8 @@
     <EntitySetMapping Name="Educations">
       <EntityTypeMapping TypeName="CAREERModel.Education">
         <MappingFragment StoreEntitySet="Education">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CvId" ColumnName="CvId" />
           <ScalarProperty Name="Branch" ColumnName="Branch" />
           <ScalarProperty Name="EduId" ColumnName="EduId" />
           <ScalarProperty Name="EduLevel" ColumnName="EduLevel" />
@@ -68,6 +70,7 @@
     <EntitySetMapping Name="Experiences">
       <EntityTypeMapping TypeName="CAREERModel.Experience">
         <MappingFragment StoreEntitySet="Experience">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="CvID" ColumnName="CvID" />
           <ScalarProperty Name="ExpDetail" ColumnName="ExpDetail" />
           <ScalarProperty Name="PozitionName" ColumnName="PozitionName" />
@@ -115,6 +118,7 @@
     <EntitySetMapping Name="Seekers">
       <EntityTypeMapping TypeName="CAREERModel.Seeker">
         <MappingFragment StoreEntitySet="Seeker">
+          <ScalarProperty Name="empDetail" ColumnName="empDetail" />
           <ScalarProperty Name="empBirthDate" ColumnName="empBirthDate" />
           <ScalarProperty Name="empPhoto" ColumnName="empPhoto" />
           <ScalarProperty Name="empMainLocation" ColumnName="empMainLocation" />

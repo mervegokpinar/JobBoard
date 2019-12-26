@@ -33,6 +33,7 @@ namespace Job.Entity
         public Nullable<decimal> empMainLocation { get; set; }
         public string empPhoto { get; set; }
         public Nullable<System.DateTime> empBirthDate { get; set; }
+        public string empDetail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C_JobSeeker> C_JobSeeker { get; set; }

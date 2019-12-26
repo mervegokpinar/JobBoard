@@ -16,14 +16,7 @@
                         {
                             <div class="dashboard-section basic-info-input">
                                 <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>Post A Job</h4>
-                                <div class="form-group row">
-                                    <div>
-                                        @Html.DisplayNameFor(model => model.JobPhoto)
-                                    </div>
-                                    <div>
-                                        <input type="file" name="photo" id="photo" />
-                                    </div>
-                                </div>
+                               
                                 <div class="form-group row">
                                     <label class="col-md-3 col-form-label">Job Title</label>
                                     <div class="col-md-9">
@@ -64,9 +57,9 @@
                                     <button class="button" type="submit">Post Your Job</button>
                                 </div>
                             </div>
-                            @Html.EditorFor(model => model.JobCompId)
-                            @Html.EditorFor(model => model.UserId)
-                            @Html.EditorFor(model => model.JobLocationId)
+                            @Html.HiddenFor(model => model.JobCompId)
+                            @Html.HiddenFor(model => model.UserId)
+                            @Html.HiddenFor(model => model.JobLocationId)
                         }
                     </div>
 

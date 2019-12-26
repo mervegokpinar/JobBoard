@@ -30,9 +30,11 @@
             <div class="col">
                 <div class="post-container">
                     <div class="post-content-wrapper">
-                        @using (Html.BeginForm("ResumeAdd", "Home", FormMethod.Post, new { @class = "job-post-form", enctype = "multipart/form-data" }))
-                        {
-                            <div class="basic-info-input">
+
+                        <div class="basic-info-input">
+                            
+                            @using (Html.BeginForm("ResumeAdd", "Home", FormMethod.Post, new { @class = "job-post-form", enctype = "multipart/form-data" }))
+                            {
                                 <h4>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle">
                                         <circle cx="12" cy="12" r="10"></circle>
@@ -45,118 +47,17 @@
                                     <label class="col-md-3 col-form-label">Give Name to Your CV </label>
                                     <div class="col-md-12">
                                         <div class="row">
-                                            @Html.EditorFor(model => model.cv.CvName, new { @class = "form-control" })
-                                            @Html.EditorFor(model=>model.cv.CvId)
+                                            @Html.TextBoxFor(model=>model.Seeker.empUserId)
+                                            @Html.EditorFor(model => model.cv.CvName, new { @class = "form-control", @placeholder = "Name" })
                                         </div>
-                                    </div>
-                                </div>
-                                <div id="details" class="row">
-                                    <label class="col-md-3 col-form-label">Personal Details</label>
-                                    <div class="col-md-9">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    @Html.TextBoxFor(model => model.Seeker.empName, new { @class = "form-control" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    @Html.TextBoxFor(model => model.Seeker.empSurname, new { @class = "form-control" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    @Html.TextBoxFor(model => model.Seeker.empEmail, new { @class = "form-control" })
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    @Html.TextBoxFor(model => model.Seeker.empBirthDate, new { @type = "date" })
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    @Html.TextAreaFor(model => model.Seeker.empAddress, new { @class = "form-control" })
-                                                </div>
-                                            </div>
-                                           
+                                            <button type="submit" value="SAVE">SAVE</button>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div id="education" class="row">
-                                    <label class="col-md-3 col-form-label">Education</label>
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            @Html.EditorFor(model => model.Education.EduLevel, new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-3 col-form-label">EDUCATION 01</label>
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            @Html.EditorFor(model => model.Education.Branch, new { @class = "form-control" })
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.EditorFor(model => model.Education.SchoolName, new { @class = "form-control" })
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Education.StartDate, new { @class = "form-control", @type = "date" })
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Education.EndDate, new { @class = "form-control", @type = "date" })
-                                            </div>
-                                        </div>
-                                        <a href="~/Home/ResumeAdd" class="add-new-field">+ Add Education</a>
-                                    </div>
-                                </div>
-                                <div id="experience" class="row">
-                                    <label class="col-md-3 col-form-label">Work Experience</label>
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            @Html.EditorFor(model => model.Experience.CompName, new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-3 col-form-label">Experience 01</label>
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Company Name" name="CompName" id="CompName">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Experience.StartDate, new {  @type = "date" })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.TextBoxFor(model => model.Experience.EndDate, new {  @type = "date" })
-                                        </div>
-                                        <button type="submit" class="add-new-field">+ Add Experience</button>
-                                    </div>
-                                </div>
-                                <div id="cv" class="row form-group">
-                                    <label class="col-md-3 col-form-label">Upload CV</label>
-                                    <div class="col-md-9">
-                                        <div class="add-cv">
-                                            <input type="file">CV File<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload-cloud"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 col-form-label"></label>
-                                    <div class="col-md-9">
-                                        <button class="button">Publish Resume</button>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
-
-
+                            }
+                        </div>
+                        
                     </div>
                     <div class="post-sidebar">
                         <h5><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>Navigation</h5>

@@ -34,6 +34,8 @@
     <Property Name="EndDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="CVs" Relationship="Self.FK_CV_Education" FromRole="Education" ToRole="CV" />
     <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CvId" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -171,6 +173,7 @@
     <NavigationProperty Name="CVs" Relationship="CAREERModel.FK_CV_Experience" FromRole="Experience" ToRole="CV" />
     <Property Name="CvID" Type="Decimal" Precision="18" Scale="0" />
     <NavigationProperty Name="CV" Relationship="CAREERModel.FK_Experience_CV" FromRole="Experience" ToRole="CV" />
+    <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
   </EntityType>
   <Association Name="FK_CV_Experience">
     <End Type="CAREERModel.Experience" Role="Experience" Multiplicity="0..1" />
@@ -203,7 +206,7 @@
     <Property Name="CompId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CompName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CompLocationId" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="CompEstDate" Type="DateTime" Precision="0" />
+    <Property Name="CompEstDate" Type="DateTime" Precision="3" />
     <Property Name="CompUserId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="CompPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Location" Relationship="CAREERModel.FK_Company_Location1" FromRole="Company" ToRole="Location" />
@@ -256,6 +259,7 @@
     <NavigationProperty Name="CVs" Relationship="CAREERModel.FK_CV_Seeker" FromRole="Seeker" ToRole="CV" />
     <NavigationProperty Name="Location" Relationship="CAREERModel.FK_Seeker_Location" FromRole="Seeker" ToRole="Location" />
     <NavigationProperty Name="User" Relationship="CAREERModel.FK_Seeker_User" FromRole="Seeker" ToRole="User" />
+    <Property Name="empDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK__JobSeeker_Seeker">
     <End Type="CAREERModel.Seeker" Role="Seeker" Multiplicity="0..1" />

@@ -1,27 +1,20 @@
 ﻿@using Job.Entity
-@using Job.Common
+@using Job.Repository
 @model JobO
 
-@{   
+@{
     ViewBag.Title = "EditJob";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
- 
+
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.JobId)
     <div class="dashboard-section basic-info-input">
         <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>Post A Job</h4>
 
-        <div class="form-group row">
-            @Html.LabelFor(model => model.JobPhoto, htmlAttributes: new { @class = "control-label col-md-2" })
 
-            <div class="col-md-10">
-                <input type="file" name="photoPath" id="photoPath" />
-                @Html.ValidationMessageFor(model => model.JobPhoto, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group row">
             <label class="col-md-3 col-form-label">Job Title</label>
@@ -41,17 +34,27 @@
                 @Html.TextAreaFor(model => model.JobDetail, new { @class = "form-control", @placeholder = "Job Title" })
             </div>
         </div>
-        <div>
-            @Html.DisplayNameFor(model => model.JobLocationId)
-        </div>
-       
-
-        <div class="form-group row">
-            <label class="col-md-3 col-form-label"></label>
+        <div class="row">
+            <label class="col-md-3 col-form-label">Job Location</label>
+            @{
+                LocationRepository lr = new LocationRepository();
+                List<SelectListItem> LocationList = new List<SelectListItem>();
+                foreach (Location item in lr.List().ProcessResult)
+                {
+                    LocationList.Add(new SelectListItem { Value = item.locationId.ToString(), Text = item.locationName });
+                }
+            }
             <div class="col-md-9">
-                <input type="submit" value="Update" class="btn btn-success" />
+                @Html.DropDownListFor(model => model.JobLocationId, LocationList)
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.JobPhoto)
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label"></label>
+                <div class="col-md-9">
+                    <input type="submit" value="Update" class="btn btn-success" />
+                </div>
             </div>
         </div>
-    </div>
 }
 

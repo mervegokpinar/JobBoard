@@ -17,8 +17,9 @@
 
                         @using (Html.BeginForm("EditProfile", "Home", FormMethod.Post, new { @class = "login-form", enctype = "multipart/form-data" }))
                         {
-                            @Html.TextBoxFor(model => model.CompId)                          
-                         
+                            @Html.HiddenFor(model => model.CompId)                          
+                            @Html.HiddenFor(model=>model.CompPhoto)
+
                             <div class="dashboard-section upload-profile-photo">
                                 <div class="update-photo">
                                     <img class="image" src="~/Upload/@Model.CompPhoto" alt="" style="max-height:200px; max-width:200px">

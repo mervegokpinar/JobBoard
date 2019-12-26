@@ -310,6 +310,7 @@
     <Content Include="Views\Home\AddJob.cshtml" />
     <Content Include="Views\Home\ListCandidate.cshtml" />
     <Content Include="Views\Home\EditProfile.cshtml" />
+    <Content Include="Views\Home\ResumeDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

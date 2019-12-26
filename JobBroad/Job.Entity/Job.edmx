@@ -20,7 +20,7 @@
           <Property Name="CompId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompName" Type="nvarchar" MaxLength="50" />
           <Property Name="CompLocationId" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="CompEstDate" Type="date" />
+          <Property Name="CompEstDate" Type="datetime" />
           <Property Name="CompUserId" Type="numeric" Precision="18" Scale="0" />
           <Property Name="CompPhoto" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -44,6 +44,8 @@
           <Property Name="StartDate" Type="date" />
           <Property Name="EndDate" Type="date" />
           <Property Name="Branch" Type="nvarchar" MaxLength="50" />
+          <Property Name="CvId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Experience">
           <Key>
@@ -56,6 +58,7 @@
           <Property Name="PozitionName" Type="nvarchar" MaxLength="50" />
           <Property Name="ExpDetail" Type="nvarchar(max)" />
           <Property Name="CvID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="JobO">
           <Key>
@@ -93,6 +96,7 @@
           <Property Name="empMainLocation" Type="numeric" Precision="18" Scale="0" />
           <Property Name="empPhoto" Type="nvarchar" MaxLength="50" />
           <Property Name="empBirthDate" Type="datetime" />
+          <Property Name="empDetail" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -366,6 +370,8 @@
           <Property Name="EndDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="CVs" Relationship="Self.FK_CV_Education" FromRole="Education" ToRole="CV" />
           <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CvId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -503,6 +509,7 @@
           <NavigationProperty Name="CVs" Relationship="CAREERModel.FK_CV_Experience" FromRole="Experience" ToRole="CV" />
           <Property Name="CvID" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="CV" Relationship="CAREERModel.FK_Experience_CV" FromRole="Experience" ToRole="CV" />
+          <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="FK_CV_Experience">
           <End Type="CAREERModel.Experience" Role="Experience" Multiplicity="0..1" />
@@ -535,7 +542,7 @@
           <Property Name="CompId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CompLocationId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="CompEstDate" Type="DateTime" Precision="0" />
+          <Property Name="CompEstDate" Type="DateTime" Precision="3" />
           <Property Name="CompUserId" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CompPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Location" Relationship="CAREERModel.FK_Company_Location1" FromRole="Company" ToRole="Location" />
@@ -588,6 +595,7 @@
           <NavigationProperty Name="CVs" Relationship="CAREERModel.FK_CV_Seeker" FromRole="Seeker" ToRole="CV" />
           <NavigationProperty Name="Location" Relationship="CAREERModel.FK_Seeker_Location" FromRole="Seeker" ToRole="Location" />
           <NavigationProperty Name="User" Relationship="CAREERModel.FK_Seeker_User" FromRole="Seeker" ToRole="User" />
+          <Property Name="empDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__JobSeeker_Seeker">
           <End Type="CAREERModel.Seeker" Role="Seeker" Multiplicity="0..1" />
@@ -726,6 +734,8 @@
           <EntitySetMapping Name="Educations">
             <EntityTypeMapping TypeName="CAREERModel.Education">
               <MappingFragment StoreEntitySet="Education">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CvId" ColumnName="CvId" />
                 <ScalarProperty Name="Branch" ColumnName="Branch" />
                 <ScalarProperty Name="EduId" ColumnName="EduId" />
                 <ScalarProperty Name="EduLevel" ColumnName="EduLevel" />
@@ -770,6 +780,7 @@
           <EntitySetMapping Name="Experiences">
             <EntityTypeMapping TypeName="CAREERModel.Experience">
               <MappingFragment StoreEntitySet="Experience">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="CvID" ColumnName="CvID" />
                 <ScalarProperty Name="ExpDetail" ColumnName="ExpDetail" />
                 <ScalarProperty Name="PozitionName" ColumnName="PozitionName" />
@@ -817,6 +828,7 @@
           <EntitySetMapping Name="Seekers">
             <EntityTypeMapping TypeName="CAREERModel.Seeker">
               <MappingFragment StoreEntitySet="Seeker">
+                <ScalarProperty Name="empDetail" ColumnName="empDetail" />
                 <ScalarProperty Name="empBirthDate" ColumnName="empBirthDate" />
                 <ScalarProperty Name="empPhoto" ColumnName="empPhoto" />
                 <ScalarProperty Name="empMainLocation" ColumnName="empMainLocation" />

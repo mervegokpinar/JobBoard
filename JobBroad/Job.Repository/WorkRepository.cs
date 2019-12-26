@@ -8,43 +8,43 @@ using Job.Common;
 
 namespace Job.Repository
 {
-    public class EducationRepository:DataRepository<Education,int>
+    public class WorkRepository : DataRepository<Experience, int>
     {
         private static CAREEREntities _db = new CAREEREntities();
-        ResultProcess<Education> result = new ResultProcess<Education>();
+        ResultProcess<Experience> result = new ResultProcess<Experience>();
 
         public override Result<int> Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public override Result<List<Education>> GetLatestObj(int Quantity)
+        public override Result<List<Experience>> GetLatestObj(int Quantity)
         {
             throw new NotImplementedException();
         }
 
-        public override Result<List<Education>> GetListById(decimal id)
+        public override Result<List<Experience>> GetListById(decimal id)
         {
             throw new NotImplementedException();
         }
 
-        public override Result<Education> GetObjById(int id)
+        public override Result<Experience> GetObjById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public override Result<int> Insert(Education item)
+        public override Result<int> Insert(Experience item)
         {
-            _db.Educations.Add(item);
+            _db.Experiences.Add(item);
             return result.GetResult(_db);
         }
 
-        public override Result<List<Education>> List()
+        public override Result<List<Experience>> List()
         {
-            return result.GetListResult(_db.Educations.ToList());
+            return result.GetListResult(_db.Experiences.ToList());
         }
 
-        public override Result<int> Update(Education item)
+        public override Result<int> Update(Experience item)
         {
             throw new NotImplementedException();
         }

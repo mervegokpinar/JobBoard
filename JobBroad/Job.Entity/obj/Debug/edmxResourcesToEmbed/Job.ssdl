@@ -15,7 +15,7 @@
     <Property Name="CompId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CompName" Type="nvarchar" MaxLength="50" />
     <Property Name="CompLocationId" Type="numeric" Precision="18" Scale="0" />
-    <Property Name="CompEstDate" Type="date" />
+    <Property Name="CompEstDate" Type="datetime" />
     <Property Name="CompUserId" Type="numeric" Precision="18" Scale="0" />
     <Property Name="CompPhoto" Type="nvarchar" MaxLength="50" />
   </EntityType>
@@ -39,6 +39,8 @@
     <Property Name="StartDate" Type="date" />
     <Property Name="EndDate" Type="date" />
     <Property Name="Branch" Type="nvarchar" MaxLength="50" />
+    <Property Name="CvId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="Experience">
     <Key>
@@ -51,6 +53,7 @@
     <Property Name="PozitionName" Type="nvarchar" MaxLength="50" />
     <Property Name="ExpDetail" Type="nvarchar(max)" />
     <Property Name="CvID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="JobO">
     <Key>
@@ -88,6 +91,7 @@
     <Property Name="empMainLocation" Type="numeric" Precision="18" Scale="0" />
     <Property Name="empPhoto" Type="nvarchar" MaxLength="50" />
     <Property Name="empBirthDate" Type="datetime" />
+    <Property Name="empDetail" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
