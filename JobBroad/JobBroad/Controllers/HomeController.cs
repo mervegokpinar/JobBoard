@@ -9,6 +9,7 @@ using Job.Repository;
 using JobBroad.Models;
 using JobBroad.Models.VM;
 using System.IO;
+using Rotativa;
 
 namespace JobBroad.Controllers
 {
@@ -148,7 +149,7 @@ namespace JobBroad.Controllers
         }
 
         #endregion
-        #region Edit Profile
+        #region Edit Profile for Employer
 
         public ActionResult EditProfile(int id)
         {
@@ -234,14 +235,15 @@ namespace JobBroad.Controllers
             decimal x = Convert.ToDecimal(ViewBag.UserId);
           
             r.Education.UserId = x;
+            r.Education.CvId = r.CV.CVId;
             resultt.resultint = er.Insert(r.Education);
-          
+            
             return RedirectToAction("ResumeDetail", "Home");
         }
         #endregion
         #region Resume Adding
-
-        public ActionResult ResumeAdd()
+       
+        public ActionResult ResumeAdd(int id)
         {
             ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
             ViewBag.UserRole = Request.Cookies["UserRole"].Value;
@@ -250,9 +252,9 @@ namespace JobBroad.Controllers
             EducationRepository er = new EducationRepository();
             ResumeViewModel rwm = new ResumeViewModel();
             decimal x = Convert.ToDecimal(ViewBag.UserId);
-           
+
             rwm.Seeker = db.Seekers.Where(t => t.empUserId == x).FirstOrDefault();
-           
+            rwm.User = db.Users.Where(t=>t.userId==id).FirstOrDefault();
             return View(rwm);
         }
 
@@ -268,15 +270,26 @@ namespace JobBroad.Controllers
             InstanceResult<CV> resultttt = new InstanceResult<CV>();
             InstanceResult<Education> resulttt = new InstanceResult<Education>();
             InstanceResult<Experience> result = new InstanceResult<Experience>();
+            InstanceResult<User> resultu = new InstanceResult<User>();
 
             SeekerRepository sr = new SeekerRepository();
             CVRepository cr = new CVRepository();
             ExperienceRepository er = new ExperienceRepository();
             EducationRepository edr = new EducationRepository();
-            CV c = model2.cv;
-          
+            UserRepository ur = new UserRepository();
+
+            User u = model2.User;
+            
+            CV c = model2.CV;
+            c.UserId= model2.User.userId;
+            c.CvName = model2.CV.CvName;
             resultttt.resultint = cr.Insert(c);
-           
+            
+            c.CVId = model2.CV.CVId;
+            u.userCVID = model2.CV.CVId;
+
+            resultu.resultint = ur.Update(u);
+
             return RedirectToAction("ResumeDetail","Home", new { model = model2 });
             
         }
@@ -306,8 +319,7 @@ namespace JobBroad.Controllers
             Job0Repository jr = new Job0Repository();
             InstanceResult<JobO> result = new InstanceResult<JobO>();
             JobO h = new JobO();
-
-
+            
             h.JobCompId = x.JobCompId;
             h.UserId = x.UserId;
             h.JobTitle = x.JobTitle;
@@ -334,7 +346,7 @@ namespace JobBroad.Controllers
             decimal x = Convert.ToDecimal(ViewBag.UserId);
 
             r.Experience.UserId = x;
-           
+            r.Experience.CvID = r.CV.CVId;
             resultt.resultint = er.Insert(r.Experience);
 
             return RedirectToAction("ResumeDetail", "Home");
@@ -368,16 +380,12 @@ namespace JobBroad.Controllers
             C_JobSeeker cj = new C_JobSeeker();
             cj.JobId = id;
             decimal x = Convert.ToDecimal(ViewBag.UserId);
-            if (ViewBag.UserId == 1)
-            {
-                return RedirectToAction("Register", "Home");
-            }
-            else
-            {
+          
+            
                 cj.SeekerId = db.Seekers.Where(k => k.empUserId == x).FirstOrDefault().empId;
                 resultt.resultint = jr.Insert(cj);
                 return RedirectToAction("ListAllJob", "Home");
-            }
+         
         }
 
         #endregion
@@ -503,9 +511,38 @@ namespace JobBroad.Controllers
         #region ShowResume
         public ActionResult ShowResume(int id)
         {
+            EducationRepository er = new EducationRepository();
+            WorkRepository wr = new WorkRepository();
+            List<Education> ListEdu = new List<Education>();
+            List<Experience> ListWork = new List<Experience>();
+
+            decimal x = Convert.ToDecimal(ViewBag.UserId);
             ResumeViewModel rwm = new ResumeViewModel();
-            rwm.Seeker = db.Seekers.Where(s => s.empId == id).FirstOrDefault();
+            foreach (Experience item in wr.List().ProcessResult)
+            {
+                if (item.UserId == id)
+                {
+                    ListWork.Add(item);
+                }
+            }
+            foreach (Education item in er.List().ProcessResult)
+            {
+                if (item.UserId == id)
+                {
+                    ListEdu.Add(item);
+                }
+            }
+            ViewBag.CurrentUser = "a";
+            ViewBag.UserRole = "2";
+            
+            rwm.EduList = ListEdu;
+            rwm.WorkList = ListWork;
+
+            rwm.Seeker = db.Seekers.Where(s => s.empUserId == id).FirstOrDefault();
+            rwm.CV = db.CVs.Where(s => s.UserId == id).FirstOrDefault();
+
             return View(rwm);
+
         }
         #endregion
         #region JobDetail
@@ -524,6 +561,7 @@ namespace JobBroad.Controllers
 
         #endregion
         #region Resume Detail
+        [HttpGet]
         public ActionResult ResumeDetail(ResumeViewModel rwm)
         {
             ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
@@ -550,11 +588,72 @@ namespace JobBroad.Controllers
                     ListEdu.Add(item);
                 }
             }
+        
             rwm.EduList = ListEdu;
             rwm.WorkList = ListWork;
             rwm.Seeker = db.Seekers.Where(y=>y.empUserId==x).FirstOrDefault();
-         
+            rwm.CV = db.CVs.Where(y => y.UserId == x).FirstOrDefault();
             return View(rwm);
+        }
+        #endregion
+        #region PdfCV
+        [HttpGet]
+       public ActionResult ExportPDF(int Id)
+        {
+           
+            return new ActionAsPdf("ShowResume",new {id=Id})
+            {
+                FileName = Server.MapPath("~/Content/Resume.pdf")
+            };
+        }
+        #endregion
+        #region Edit Candidate Profile
+       public ActionResult EditCanProf(int id)
+        {
+            ViewBag.CurrentUser = Request.Cookies["UserLogin"].Value;
+            ViewBag.UserRole = Request.Cookies["UserRole"].Value;
+            ViewBag.UserId = Request.Cookies["UserId"].Value;
+
+            SeekerRepository sr = new SeekerRepository();
+            InstanceResult<Seeker> result = new InstanceResult<Seeker>();
+
+            result.TResult = sr.GetObjById(id);
+            return View(result.TResult.ProcessResult);
+        }
+
+        [HttpPost]
+        public ActionResult EditCanProf(Seeker model, HttpPostedFileBase photo)
+        {
+            InstanceResult<Seeker> result = new InstanceResult<Seeker>();
+            SeekerRepository sr = new SeekerRepository();
+            string photoName = model.empPhoto;
+            if (photo != null)
+            {
+                if (photo.ContentLength > 0)
+                {
+                    string ext = Path.GetExtension(photo.FileName);
+                    photoName = Guid.NewGuid().ToString().Replace("-", "");
+                    if (ext == ".jpg")
+                        photoName += ext;
+                    else if (ext == ".png")
+                        photoName += ext;
+                    else if (ext == ".bmp")
+                        photoName += ext;
+                    else
+                    {
+                        ViewBag.Mesaj = "Please upload photos of type .jpg,.png,.bmp ";
+                        return View(model);
+                    }
+                    string path = Server.MapPath("~/Upload/" + photoName);
+                    photo.SaveAs(path);
+                }
+            }
+            model.empPhoto = photoName;
+            result.resultint = sr.Update(model);
+            if (result.resultint.IsSucceeded)
+                return RedirectToAction("Index");
+            else
+                return View(model);
         }
         #endregion
     }

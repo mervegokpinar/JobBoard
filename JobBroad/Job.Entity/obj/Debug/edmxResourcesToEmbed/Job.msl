@@ -10,17 +10,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CVs">
-      <EntityTypeMapping TypeName="CAREERModel.CV">
-        <MappingFragment StoreEntitySet="CV">
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="CvId" ColumnName="CvId" />
-          <ScalarProperty Name="CvName" ColumnName="CvName" />
-          <ScalarProperty Name="CvExpId" ColumnName="CvExpId" />
-          <ScalarProperty Name="CvEduId" ColumnName="CvEduId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Educations">
       <EntityTypeMapping TypeName="CAREERModel.Education">
         <MappingFragment StoreEntitySet="Education">
@@ -49,6 +38,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="CAREERModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="userCVID" ColumnName="userCVID" />
           <ScalarProperty Name="userSurname" ColumnName="userSurname" />
           <ScalarProperty Name="userPhoto" ColumnName="userPhoto" />
           <ScalarProperty Name="userId" ColumnName="userId" />
@@ -78,18 +68,6 @@
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="CompName" ColumnName="CompName" />
           <ScalarProperty Name="ExpId" ColumnName="ExpId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Companies">
-      <EntityTypeMapping TypeName="CAREERModel.Company">
-        <MappingFragment StoreEntitySet="Company">
-          <ScalarProperty Name="CompPhoto" ColumnName="CompPhoto" />
-          <ScalarProperty Name="CompUserId" ColumnName="CompUserId" />
-          <ScalarProperty Name="CompEstDate" ColumnName="CompEstDate" />
-          <ScalarProperty Name="CompLocationId" ColumnName="CompLocationId" />
-          <ScalarProperty Name="CompName" ColumnName="CompName" />
-          <ScalarProperty Name="CompId" ColumnName="CompId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -131,6 +109,27 @@
           <ScalarProperty Name="empName" ColumnName="empName" />
           <ScalarProperty Name="empUserId" ColumnName="empUserId" />
           <ScalarProperty Name="empId" ColumnName="empId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CVs">
+      <EntityTypeMapping TypeName="CAREERModel.CV">
+        <MappingFragment StoreEntitySet="CV">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CvName" ColumnName="CvName" />
+          <ScalarProperty Name="CVId" ColumnName="CVId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="CAREERModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="CompPhoto" ColumnName="CompPhoto" />
+          <ScalarProperty Name="CompUserId" ColumnName="CompUserId" />
+          <ScalarProperty Name="CompEstDate" ColumnName="CompEstDate" />
+          <ScalarProperty Name="CompLocationId" ColumnName="CompLocationId" />
+          <ScalarProperty Name="CompName" ColumnName="CompName" />
+          <ScalarProperty Name="CompId" ColumnName="CompId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

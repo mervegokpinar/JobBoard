@@ -47,7 +47,9 @@ namespace Job.Repository
 
         public override Result<int> Update(User item)
         {
-            throw new NotImplementedException();
+            User user = db.Users.SingleOrDefault(t => t.userId == item.userId);
+            user.userCVID = item.userCVID;
+            return result.GetResult(db);
         }
     }
 }

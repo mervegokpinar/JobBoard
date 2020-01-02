@@ -11,11 +11,7 @@
             <div class="col">
                 <div class="job-listing-container">
                     <div class="filtered-job-listing-wrapper">
-                        <div class="job-view-controller-wrapper">
-                            <div class="showing-number">
-                                <span>Showing 1–12 of 28 Jobs</span>
-                            </div>
-                        </div>
+                       
                         <div class="job-filter-result">
 
                             @foreach (var item in Model)
@@ -23,7 +19,7 @@
                                 <div class="job-list">
                                     <div class="thumb">
                                         <a href="#">
-                                            <img src="~/Upload/@item.JobPhoto" class="img-fluid" alt="">
+                                            <img src="~/Upload/@item.Company.CompPhoto" class="img-fluid" alt="">
                                         </a>
                                     </div>
                                     <div class="body">
@@ -32,9 +28,10 @@
                                             
                                         </div>
                                         <div class="more">
-                                            <div class="buttons">
-                                                <a target="_blank" href="/Home/JobDetail/@item.JobId" class="btn btn-info" style="width:100px">Show</a>
-                                            </div>
+                                           
+
+                                                <a href="/Home/JobDetail/@item.JobId" class="button primary-bg btn-block" style="color:#ffffff;  text-align:center; width:100px">Show</a>
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -43,18 +40,7 @@
                                 </div>
                             }
                         </div>
-                        <div class="pagination-list text-center">
-                            <nav class="navigation pagination">
-                                <div class="nav-links">
-                                    <a class="prev page-numbers" href="#"><i class="fas fa-angle-left"></i></a>
-                                    <a class="page-numbers" href="#">1</a>
-                                    <span aria-current="page" class="page-numbers current">2</span>
-                                    <a class="page-numbers" href="#">3</a>
-                                    <a class="page-numbers" href="#">4</a>
-                                    <a class="next page-numbers" href="#"><i class="fas fa-angle-right"></i></a>
-                                </div>
-                            </nav>
-                        </div>
+                  
                     </div>
 
                 </div>

@@ -174,3 +174,4 @@ C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\JobBroad\obj\Debug\JobBroa
 C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\JobBroad\obj\Debug\JobBroad.csproj.CopyComplete
 C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\JobBroad\obj\Debug\JobBroad.dll
 C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\JobBroad\obj\Debug\JobBroad.pdb
+C:\Users\mgokpinar\Documents\GitHub\JobBoard\JobBroad\JobBroad\bin\Rotativa.dll

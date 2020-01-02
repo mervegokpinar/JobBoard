@@ -22,13 +22,12 @@
 
                             <div class="dashboard-section upload-profile-photo">
                                 <div class="update-photo">
-                                    <img class="image" src="~/Upload/@Model.CompPhoto" alt="" style="max-height:200px; max-width:200px">
+                                    <img class="image" src="~/Upload/@Model.CompPhoto" alt="" style="max-height:200px; max-width:200px" name="photo"> 
                                 </div>
                                 <div class="file-upload">
                                     <input type="file" name="photo" id="photo" class="file-input" />Change Avatar
                                 </div>
                             </div>
-
                             <div class="dashboard-section basic-info-input">
                                 <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>Basic Info</h4>
                                 <div class="form-group row">
@@ -55,10 +54,10 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Established Date</label>
                                     <div class="col-sm-9">
-                                        @Html.EditorFor(m => m.CompEstDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                        @Html.EditorFor(m => m.CompEstDate, new { htmlAttributes = new { @class = "form-control"} })
                                     </div>
                                 </div>
-                                <button class="button" type="submit">Save Change</button>
+                                <button  type="submit" class="button primary-bg btn-block" style="color:#ffffff">Save Changes</button>
                             </div>
                         }
                     </div>

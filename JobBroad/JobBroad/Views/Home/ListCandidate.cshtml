@@ -10,12 +10,7 @@
             <div class="col">
                 <div class="job-listing-container">
                     <div class="filtered-job-listing-wrapper">
-                        <div class="job-view-controller-wrapper">
-                            <div class="showing-number">
-                                <span>Showing 1–12 of 28 Jobs</span>
-                            </div>
-                        </div>
-
+                       
                         <div class="job-filter-result">
 
                             @foreach (var item in Model)
@@ -32,15 +27,13 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <a href="~/Home/ShowResume/@item.empId"> Bu adayın Cv'sini görüntüle</a>
+                                        <a type="button" href="~/Home/ShowResume/@item.empUserId" class="button primary-bg btn-block" style="color:#ffffff; text-align:center; margin-right:10px; text-wrap:none;  min-width:100px">Show CV</a>
+
                                     </div>
                                 </div>
 
                             }
 
-                            <div>
-
-                            </div>
                         </div>
                         
                     </div>

@@ -17,19 +17,20 @@ namespace Job.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CV()
         {
+            this.Educations = new HashSet<Education>();
             this.Experiences = new HashSet<Experience>();
+            this.Users = new HashSet<User>();
         }
     
-        public decimal CvId { get; set; }
+        public decimal CVId { get; set; }
         public string CvName { get; set; }
-        public Nullable<decimal> CvExpId { get; set; }
-        public Nullable<decimal> CvEduId { get; set; }
         public Nullable<decimal> UserId { get; set; }
     
-        public virtual Education Education { get; set; }
-        public virtual Experience Experience { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Education> Educations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Experience> Experiences { get; set; }
-        public virtual Seeker Seeker { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

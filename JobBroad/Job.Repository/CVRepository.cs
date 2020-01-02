@@ -30,7 +30,8 @@ namespace Job.Repository
 
         public override Result<CV> GetObjById(int id)
         {
-            throw new NotImplementedException();
+            CV c = _db.CVs.SingleOrDefault(t => t.CVId == id);
+            return result.GetT(c); ;
         }
 
         public override Result<int> Insert(CV item)
@@ -41,12 +42,8 @@ namespace Job.Repository
 
         public override Result<List<CV>> List()
         {
-            throw new NotImplementedException();
+            return result.GetListResult(_db.CVs.ToList());
         }
 
-        public override Result<int> Update(CV item)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

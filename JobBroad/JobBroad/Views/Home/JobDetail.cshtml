@@ -5,120 +5,47 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-
-<div class="job-listing-details">
-    <div class="job-title-and-info">
-        <div class="title">
-            <div class="thumb">
-                <img src="images/job/company-logo-1.png" class="img-fluid" alt="">
-            </div>
-            <div class="title-body">
-                <h4>@Html.DisplayFor(model => model.JobTitle)</h4>
-                <div class="info">
-                    <span class="company"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>@Html.DisplayFor(model => model.Company.CompName)</a></span>
-                    <span class="office-location"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>@Html.DisplayFor(model => model.Location.locationName)</a></span>
-                    <span class="job-type full-time"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Full Time</a></span>
-                </div>
-            </div>
-        </div>
-        <div class="buttons">
-            <a class="save" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>Save Job</a>
-            <a class="apply" href="#" data-toggle="modal" data-target="#apply-popup-id">Apply Online</a>
-        </div>
-    </div>
-    <div class="details-information section-padding-60">
-        <div class="row">
-            <div class="col-xl-7 col-lg-8">
-                <div class="description details-section">
-                    <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-align-left"><line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg>Job Description</h4>
-                    <p>Combined with a handful of model sentence structures, to generate lorem Ipsum which  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including.</p>
-                    <p>Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable </p>
-                </div>
-                <div class="responsibilities details-section">
-                    <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>Responsibilities</h4>
-                    <ul>
-                        <li>The applicants should have experience in the following areas</li>
-                        <li>Skills on M.S Word, Excel, and Integrated Accounting package i.e. Software</li>
-                        <li>Have sound knowledge of commercial activities.</li>
-                        <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
-                        <li>Good verbal and written communication skills.</li>
-                        <li>Leadership, analytical, and problem-solving abilities.</li>
-                    </ul>
-                </div>
-                <div class="edication-and-experience details-section">
-                    <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>Education + Experience</h4>
-                    <ul>
-                        <li>M.Com (Accounting) / M.B.S / M.B.A under National University with CA course complete.</li>
-                        <li>M.S (Statistics) any Public University / National University.</li>
-                        <li>Masters of library science any Public University.</li>
-                        <li>2 to 3 year(s) Experiance</li>
-                        <li>Females candidate are discourage to apply.</li>
-                    </ul>
-                </div>
-                <div class="other-benifit details-section">
-                    <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-gift"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>Other Benefits</h4>
-                    <ul>
-                        <li>Health and life insurance </li>
-                        <li>2 days of weekend </li>
-                        <li>2 annual performanc Bonuses</li>
-                        <li>Lunch &amp; Snacks</li>
-                    </ul>
-                </div>
-
-            </div>
-            <div class="col-xl-4 offset-xl-1 col-lg-4">
-                <div class="information-and-share">
-                    <div class="job-summary">
-                        <h4>Job Summary</h4>
-                        <ul>
-                            <li><span>Published on:</span> Oct 6,  2019</li>
-                            <li><span>Vacancy:</span> 08</li>
-                            <li><span>Employment Status:</span> Full-time</li>
-                            <li><span>Experience:</span> 2 to 3 year(s)</li>
-                            <li><span>Job Location:</span> New ork City</li>
-                            <li><span>Salary:</span> $32k - $36k</li>
-                            <li><span>Gender:</span> Any</li>
-                            <li><span>Application Deadline:</span> Oct 15,  2019</li>
-                        </ul>
+<div class="alice-bg section-padding-bottom">
+    <div class="container">
+        <div class="job-listing-details">
+            <div class="job-title-and-info">
+                <div class="title">
+                    <div class="thumb">
+                        <img src="images/job/company-logo-1.png" class="img-fluid" alt="">
                     </div>
-                    <div class="share-job-post">
-                        <span class="share"><i class="fas fa-share-alt"></i>Share:</span>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                        <a href="#" class="add-more"><span class="ti-plus"></span></a>
+                    <div class="title-body">
+                        <h4>@Html.DisplayFor(model => model.JobTitle)</h4>
+                        <div class="info">
+                            <span class="company"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>@Html.DisplayFor(model => model.Company.CompName)</a></span>
+                            <span class="office-location"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>@Html.DisplayFor(model => model.Location.locationName)</a></span>
+                        </div>
                     </div>
-                    <div class="buttons">
-                        <a href="#" class="button print"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print Job</a>
-                        <a href="#" class="button report"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-flag"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>Report Job</a>
+                </div>
+                <div class="buttons">
+                    <a class="apply" href="~/Home/ApplyJob/@Model.JobId">Apply Online</a>
+                </div>
+            </div>
+            <div class="details-information section-padding-60">
+                <div class="row">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="description details-section">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-align-left"><line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg>Job Description</h4>
+                            <p>@Model.JobDetail</p>
+                        </div>
+
+
+
                     </div>
 
                 </div>
             </div>
+
+        </div>
+
+        <div class="job-apply-buttons">
+            <a href="~/Home/ApplyJob/@Model.JobId" class="apply" style="margin-bottom:20px">APPLY</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xl-7 col-lg-8">
-            <div class="company-information details-section">
-                <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>About the Company</h4>
-                <ul>
-                    <li><span>Company Name:</span> The Oreo Company Ltd.</li>
-                    <li><span>Address:</span> Queens, NY 11375 USA</li>
-                    <li><span>Website:</span> <a href="#">www.theoreoltd.com</a></li>
-                    <li><span>Company Profile:</span></li>
-                    <li>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum looked up one of the more obscure Latin words, consectetur.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="job-apply-buttons">
-    <a href="~/Home/ApplyJob/@Model.JobId">APPLY</a>
-    <button type="submit">OKEY</button>
-
 </div>
 
 

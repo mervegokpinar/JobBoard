@@ -9,20 +9,6 @@
     <Property Name="SeekerId" Type="Decimal" Precision="18" Scale="0" />
     <NavigationProperty Name="Seeker" Relationship="CAREERModel.FK__JobSeeker_Seeker" FromRole="C_JobSeeker" ToRole="Seeker" />
   </EntityType>
-  <EntityType Name="CV">
-    <Key>
-      <PropertyRef Name="CvId" />
-    </Key>
-    <Property Name="CvId" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CvName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CvExpId" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="CvEduId" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="Education" Relationship="Self.FK_CV_Education" FromRole="CV" ToRole="Education" />
-    <NavigationProperty Name="Experience" Relationship="CAREERModel.FK_CV_Experience" FromRole="CV" ToRole="Experience" />
-    <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="Experiences" Relationship="CAREERModel.FK_Experience_CV" FromRole="CV" ToRole="Experience" />
-    <NavigationProperty Name="Seeker" Relationship="CAREERModel.FK_CV_Seeker" FromRole="CV" ToRole="Seeker" />
-  </EntityType>
   <EntityType Name="Education">
     <Key>
       <PropertyRef Name="EduId" />
@@ -32,10 +18,11 @@
     <Property Name="SchoolName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="StartDate" Type="DateTime" Precision="0" />
     <Property Name="EndDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="CVs" Relationship="Self.FK_CV_Education" FromRole="Education" ToRole="CV" />
     <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="CvId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="User" Relationship="CAREERModel.FK_Education_User" FromRole="Education" ToRole="User" />
+    <NavigationProperty Name="CV" Relationship="CAREERModel.FK_Education_CV" FromRole="Education" ToRole="CV" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -59,9 +46,13 @@
     <NavigationProperty Name="UserRole" Relationship="Self.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
     <Property Name="userPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="userSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Companies" Relationship="CAREERModel.FK_Company_User1" FromRole="User" ToRole="Company" />
     <NavigationProperty Name="Seekers" Relationship="CAREERModel.FK_Seeker_User" FromRole="User" ToRole="Seeker" />
     <NavigationProperty Name="JobOes" Relationship="CAREERModel.FK_JobO_User" FromRole="User" ToRole="JobO" />
+    <NavigationProperty Name="Educations" Relationship="CAREERModel.FK_Education_User" FromRole="User" ToRole="Education" />
+    <NavigationProperty Name="Experiences" Relationship="CAREERModel.FK_Experience_User" FromRole="User" ToRole="Experience" />
+    <Property Name="userCVID" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="CV" Relationship="CAREERModel.FK_User_CV" FromRole="User" ToRole="CV" />
+    <NavigationProperty Name="Companies" Relationship="CAREERModel.FK_Company_User1" FromRole="User" ToRole="Company" />
   </EntityType>
   <EntityType Name="UserRole">
     <Key>
@@ -71,18 +62,6 @@
     <Property Name="userRole1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Users" Relationship="Self.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
   </EntityType>
-  <Association Name="FK_CV_Education">
-    <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
-    <End Role="CV" Type="Self.CV" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Education">
-        <PropertyRef Name="EduId" />
-      </Principal>
-      <Dependent Role="CV">
-        <PropertyRef Name="CvEduId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_User_UserRole">
     <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
     <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -97,52 +76,18 @@
   </Association>
   <EntityContainer Name="CAREEREntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C_JobSeeker" EntityType="Self.C_JobSeeker" />
-    <EntitySet Name="CVs" EntityType="Self.CV" />
     <EntitySet Name="Educations" EntityType="Self.Education" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
-    <AssociationSet Name="FK_CV_Education" Association="Self.FK_CV_Education">
-      <End Role="Education" EntitySet="Educations" />
-      <End Role="CV" EntitySet="CVs" />
-    </AssociationSet>
     <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
       <End Role="UserRole" EntitySet="UserRoles" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
     <EntitySet Name="Experiences" EntityType="CAREERModel.Experience" />
-    <AssociationSet Name="FK_CV_Experience" Association="CAREERModel.FK_CV_Experience">
-      <End Role="Experience" EntitySet="Experiences" />
-      <End Role="CV" EntitySet="CVs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Experience_CV" Association="CAREERModel.FK_Experience_CV">
-      <End Role="CV" EntitySet="CVs" />
-      <End Role="Experience" EntitySet="Experiences" />
-    </AssociationSet>
-    <EntitySet Name="Companies" EntityType="CAREERModel.Company" />
     <EntitySet Name="JobOes" EntityType="CAREERModel.JobO" />
     <EntitySet Name="Locations" EntityType="CAREERModel.Location" />
     <EntitySet Name="Seekers" EntityType="CAREERModel.Seeker" />
-    <AssociationSet Name="FK__JobSeeker_Seeker" Association="CAREERModel.FK__JobSeeker_Seeker">
-      <End Role="Seeker" EntitySet="Seekers" />
-      <End Role="C_JobSeeker" EntitySet="C_JobSeeker" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Company_Location1" Association="CAREERModel.FK_Company_Location1">
-      <End Role="Location" EntitySet="Locations" />
-      <End Role="Company" EntitySet="Companies" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Company_User1" Association="CAREERModel.FK_Company_User1">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Company" EntitySet="Companies" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Job_Company" Association="CAREERModel.FK_Job_Company">
-      <End Role="Company" EntitySet="Companies" />
-      <End Role="JobO" EntitySet="JobOes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CV_Seeker" Association="CAREERModel.FK_CV_Seeker">
-      <End Role="Seeker" EntitySet="Seekers" />
-      <End Role="CV" EntitySet="CVs" />
-    </AssociationSet>
     <AssociationSet Name="FK_JobO_Location" Association="CAREERModel.FK_JobO_Location">
       <End Role="Location" EntitySet="Locations" />
       <End Role="JobO" EntitySet="JobOes" />
@@ -159,6 +104,44 @@
       <End Role="User" EntitySet="Users" />
       <End Role="JobO" EntitySet="JobOes" />
     </AssociationSet>
+    <AssociationSet Name="FK__JobSeeker_Seeker" Association="CAREERModel.FK__JobSeeker_Seeker">
+      <End Role="Seeker" EntitySet="Seekers" />
+      <End Role="C_JobSeeker" EntitySet="C_JobSeeker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Education_User" Association="CAREERModel.FK_Education_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Education" EntitySet="Educations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Experience_User" Association="CAREERModel.FK_Experience_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Experience" EntitySet="Experiences" />
+    </AssociationSet>
+    <EntitySet Name="CVs" EntityType="CAREERModel.CV" />
+    <AssociationSet Name="FK_Education_CV" Association="CAREERModel.FK_Education_CV">
+      <End Role="CV" EntitySet="CVs" />
+      <End Role="Education" EntitySet="Educations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Experience_CV1" Association="CAREERModel.FK_Experience_CV1">
+      <End Role="CV" EntitySet="CVs" />
+      <End Role="Experience" EntitySet="Experiences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_CV" Association="CAREERModel.FK_User_CV">
+      <End Role="CV" EntitySet="CVs" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="Companies" EntityType="CAREERModel.Company" />
+    <AssociationSet Name="FK_Company_Location1" Association="CAREERModel.FK_Company_Location1">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_User1" Association="CAREERModel.FK_Company_User1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Company" Association="CAREERModel.FK_Job_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="JobO" EntitySet="JobOes" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Experience">
     <Key>
@@ -170,48 +153,10 @@
     <Property Name="EndDate" Type="DateTime" Precision="0" />
     <Property Name="PozitionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ExpDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CVs" Relationship="CAREERModel.FK_CV_Experience" FromRole="Experience" ToRole="CV" />
     <Property Name="CvID" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="CV" Relationship="CAREERModel.FK_Experience_CV" FromRole="Experience" ToRole="CV" />
     <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
-  </EntityType>
-  <Association Name="FK_CV_Experience">
-    <End Type="CAREERModel.Experience" Role="Experience" Multiplicity="0..1" />
-    <End Type="CAREERModel.CV" Role="CV" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Experience">
-        <PropertyRef Name="ExpId" />
-      </Principal>
-      <Dependent Role="CV">
-        <PropertyRef Name="CvExpId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Experience_CV">
-    <End Type="CAREERModel.CV" Role="CV" Multiplicity="0..1" />
-    <End Type="CAREERModel.Experience" Role="Experience" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CV">
-        <PropertyRef Name="CvId" />
-      </Principal>
-      <Dependent Role="Experience">
-        <PropertyRef Name="CvID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="Company">
-    <Key>
-      <PropertyRef Name="CompId" />
-    </Key>
-    <Property Name="CompId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CompName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CompLocationId" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="CompEstDate" Type="DateTime" Precision="3" />
-    <Property Name="CompUserId" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="CompPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Location" Relationship="CAREERModel.FK_Company_Location1" FromRole="Company" ToRole="Location" />
-    <NavigationProperty Name="User" Relationship="CAREERModel.FK_Company_User1" FromRole="Company" ToRole="User" />
-    <NavigationProperty Name="JobOes" Relationship="CAREERModel.FK_Job_Company" FromRole="Company" ToRole="JobO" />
+    <NavigationProperty Name="User" Relationship="CAREERModel.FK_Experience_User" FromRole="Experience" ToRole="User" />
+    <NavigationProperty Name="CV" Relationship="CAREERModel.FK_Experience_CV1" FromRole="Experience" ToRole="CV" />
   </EntityType>
   <EntityType Name="JobO">
     <Key>
@@ -224,10 +169,10 @@
     <Property Name="JobLocationId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="JobCompId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="JobPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Company" Relationship="CAREERModel.FK_Job_Company" FromRole="JobO" ToRole="Company" />
     <NavigationProperty Name="Location" Relationship="CAREERModel.FK_JobO_Location" FromRole="JobO" ToRole="Location" />
     <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
     <NavigationProperty Name="User" Relationship="CAREERModel.FK_JobO_User" FromRole="JobO" ToRole="User" />
+    <NavigationProperty Name="Company" Relationship="CAREERModel.FK_Job_Company" FromRole="JobO" ToRole="Company" />
   </EntityType>
   <EntityType Name="Location">
     <Key>
@@ -235,9 +180,9 @@
     </Key>
     <Property Name="locationId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="locationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Companies" Relationship="CAREERModel.FK_Company_Location1" FromRole="Location" ToRole="Company" />
     <NavigationProperty Name="JobOes" Relationship="CAREERModel.FK_JobO_Location" FromRole="Location" ToRole="JobO" />
     <NavigationProperty Name="Seekers" Relationship="CAREERModel.FK_Seeker_Location" FromRole="Location" ToRole="Seeker" />
+    <NavigationProperty Name="Companies" Relationship="CAREERModel.FK_Company_Location1" FromRole="Location" ToRole="Company" />
   </EntityType>
   <EntityType Name="Seeker">
     <Key>
@@ -255,72 +200,11 @@
     <Property Name="empMainLocation" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="empPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="empBirthDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="C_JobSeeker" Relationship="CAREERModel.FK__JobSeeker_Seeker" FromRole="Seeker" ToRole="C_JobSeeker" />
-    <NavigationProperty Name="CVs" Relationship="CAREERModel.FK_CV_Seeker" FromRole="Seeker" ToRole="CV" />
     <NavigationProperty Name="Location" Relationship="CAREERModel.FK_Seeker_Location" FromRole="Seeker" ToRole="Location" />
     <NavigationProperty Name="User" Relationship="CAREERModel.FK_Seeker_User" FromRole="Seeker" ToRole="User" />
     <Property Name="empDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C_JobSeeker" Relationship="CAREERModel.FK__JobSeeker_Seeker" FromRole="Seeker" ToRole="C_JobSeeker" />
   </EntityType>
-  <Association Name="FK__JobSeeker_Seeker">
-    <End Type="CAREERModel.Seeker" Role="Seeker" Multiplicity="0..1" />
-    <End Type="CAREERModel.C_JobSeeker" Role="C_JobSeeker" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Seeker">
-        <PropertyRef Name="empId" />
-      </Principal>
-      <Dependent Role="C_JobSeeker">
-        <PropertyRef Name="SeekerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Company_Location1">
-    <End Type="CAREERModel.Location" Role="Location" Multiplicity="0..1" />
-    <End Type="CAREERModel.Company" Role="Company" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Location">
-        <PropertyRef Name="locationId" />
-      </Principal>
-      <Dependent Role="Company">
-        <PropertyRef Name="CompLocationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Company_User1">
-    <End Type="CAREERModel.User" Role="User" Multiplicity="0..1" />
-    <End Type="CAREERModel.Company" Role="Company" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="userId" />
-      </Principal>
-      <Dependent Role="Company">
-        <PropertyRef Name="CompUserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Job_Company">
-    <End Type="CAREERModel.Company" Role="Company" Multiplicity="0..1" />
-    <End Type="CAREERModel.JobO" Role="JobO" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Company">
-        <PropertyRef Name="CompId" />
-      </Principal>
-      <Dependent Role="JobO">
-        <PropertyRef Name="JobCompId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CV_Seeker">
-    <End Type="CAREERModel.Seeker" Role="Seeker" Multiplicity="0..1" />
-    <End Type="CAREERModel.CV" Role="CV" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Seeker">
-        <PropertyRef Name="empId" />
-      </Principal>
-      <Dependent Role="CV">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_JobO_Location">
     <End Type="CAREERModel.Location" Role="Location" Multiplicity="0..1" />
     <End Type="CAREERModel.JobO" Role="JobO" Multiplicity="*" />
@@ -366,6 +250,139 @@
       </Principal>
       <Dependent Role="JobO">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__JobSeeker_Seeker">
+    <End Type="CAREERModel.Seeker" Role="Seeker" Multiplicity="0..1" />
+    <End Type="CAREERModel.C_JobSeeker" Role="C_JobSeeker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seeker">
+        <PropertyRef Name="empId" />
+      </Principal>
+      <Dependent Role="C_JobSeeker">
+        <PropertyRef Name="SeekerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Education_User">
+    <End Type="CAREERModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CAREERModel.Education" Role="Education" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Education">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Experience_User">
+    <End Type="CAREERModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CAREERModel.Experience" Role="Experience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Experience">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CV">
+    <Key>
+      <PropertyRef Name="CVId" />
+    </Key>
+    <Property Name="CVId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CvName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Educations" Relationship="CAREERModel.FK_Education_CV" FromRole="CV" ToRole="Education" />
+    <NavigationProperty Name="Experiences" Relationship="CAREERModel.FK_Experience_CV1" FromRole="CV" ToRole="Experience" />
+    <NavigationProperty Name="Users" Relationship="CAREERModel.FK_User_CV" FromRole="CV" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Education_CV">
+    <End Type="CAREERModel.CV" Role="CV" Multiplicity="0..1" />
+    <End Type="CAREERModel.Education" Role="Education" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CV">
+        <PropertyRef Name="CVId" />
+      </Principal>
+      <Dependent Role="Education">
+        <PropertyRef Name="CvId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Experience_CV1">
+    <End Type="CAREERModel.CV" Role="CV" Multiplicity="0..1" />
+    <End Type="CAREERModel.Experience" Role="Experience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CV">
+        <PropertyRef Name="CVId" />
+      </Principal>
+      <Dependent Role="Experience">
+        <PropertyRef Name="CvID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_CV">
+    <End Type="CAREERModel.CV" Role="CV" Multiplicity="0..1" />
+    <End Type="CAREERModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CV">
+        <PropertyRef Name="CVId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="userCVID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompId" />
+    </Key>
+    <Property Name="CompId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompLocationId" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CompEstDate" Type="DateTime" Precision="0" />
+    <Property Name="CompUserId" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CompPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Location" Relationship="CAREERModel.FK_Company_Location1" FromRole="Company" ToRole="Location" />
+    <NavigationProperty Name="User" Relationship="CAREERModel.FK_Company_User1" FromRole="Company" ToRole="User" />
+    <NavigationProperty Name="JobOes" Relationship="CAREERModel.FK_Job_Company" FromRole="Company" ToRole="JobO" />
+  </EntityType>
+  <Association Name="FK_Company_Location1">
+    <End Type="CAREERModel.Location" Role="Location" Multiplicity="0..1" />
+    <End Type="CAREERModel.Company" Role="Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="locationId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="CompLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_User1">
+    <End Type="CAREERModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="CAREERModel.Company" Role="Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="CompUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Company">
+    <End Type="CAREERModel.Company" Role="Company" Multiplicity="0..1" />
+    <End Type="CAREERModel.JobO" Role="JobO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompId" />
+      </Principal>
+      <Dependent Role="JobO">
+        <PropertyRef Name="JobCompId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

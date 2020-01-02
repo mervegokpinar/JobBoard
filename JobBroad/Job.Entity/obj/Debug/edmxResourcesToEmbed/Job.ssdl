@@ -15,18 +15,16 @@
     <Property Name="CompId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CompName" Type="nvarchar" MaxLength="50" />
     <Property Name="CompLocationId" Type="numeric" Precision="18" Scale="0" />
-    <Property Name="CompEstDate" Type="datetime" />
+    <Property Name="CompEstDate" Type="date" />
     <Property Name="CompUserId" Type="numeric" Precision="18" Scale="0" />
     <Property Name="CompPhoto" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="CV">
     <Key>
-      <PropertyRef Name="CvId" />
+      <PropertyRef Name="CVId" />
     </Key>
-    <Property Name="CvId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CVId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CvName" Type="nvarchar" MaxLength="50" />
-    <Property Name="CvExpId" Type="numeric" Precision="18" Scale="0" />
-    <Property Name="CvEduId" Type="numeric" Precision="18" Scale="0" />
     <Property Name="UserId" Type="numeric" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="Education">
@@ -114,6 +112,7 @@
     <Property Name="userPassword" Type="nvarchar" MaxLength="50" />
     <Property Name="userMail" Type="nvarchar" MaxLength="50" />
     <Property Name="userRoleId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="userCVID" Type="numeric" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="UserRole">
     <Key>
@@ -158,39 +157,51 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CV_Education">
-    <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
-    <End Role="CV" Type="Self.CV" Multiplicity="*" />
+  <Association Name="FK_Education_CV">
+    <End Role="CV" Type="Self.CV" Multiplicity="0..1" />
+    <End Role="Education" Type="Self.Education" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Education">
-        <PropertyRef Name="EduId" />
+      <Principal Role="CV">
+        <PropertyRef Name="CVId" />
       </Principal>
-      <Dependent Role="CV">
-        <PropertyRef Name="CvEduId" />
+      <Dependent Role="Education">
+        <PropertyRef Name="CvId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CV_Seeker">
-    <End Role="Seeker" Type="Self.Seeker" Multiplicity="0..1" />
-    <End Role="CV" Type="Self.CV" Multiplicity="*" />
+  <Association Name="FK_Education_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Education" Type="Self.Education" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Seeker">
-        <PropertyRef Name="empId" />
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
       </Principal>
-      <Dependent Role="CV">
+      <Dependent Role="Education">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Experience_CV">
+  <Association Name="FK_Experience_CV1">
     <End Role="CV" Type="Self.CV" Multiplicity="0..1" />
     <End Role="Experience" Type="Self.Experience" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CV">
-        <PropertyRef Name="CvId" />
+        <PropertyRef Name="CVId" />
       </Principal>
       <Dependent Role="Experience">
         <PropertyRef Name="CvID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Experience_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Experience" Type="Self.Experience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Experience">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -254,6 +265,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_User_CV">
+    <End Role="CV" Type="Self.CV" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CV">
+        <PropertyRef Name="CVId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="userCVID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_User_UserRole">
     <End Role="UserRole" Type="Self.UserRole" Multiplicity="0..1" />
     <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -290,16 +313,20 @@
       <End Role="User" EntitySet="User" />
       <End Role="Company" EntitySet="Company" />
     </AssociationSet>
-    <AssociationSet Name="FK_CV_Education" Association="Self.FK_CV_Education">
+    <AssociationSet Name="FK_Education_CV" Association="Self.FK_Education_CV">
+      <End Role="CV" EntitySet="CV" />
       <End Role="Education" EntitySet="Education" />
-      <End Role="CV" EntitySet="CV" />
     </AssociationSet>
-    <AssociationSet Name="FK_CV_Seeker" Association="Self.FK_CV_Seeker">
-      <End Role="Seeker" EntitySet="Seeker" />
-      <End Role="CV" EntitySet="CV" />
+    <AssociationSet Name="FK_Education_User" Association="Self.FK_Education_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Education" EntitySet="Education" />
     </AssociationSet>
-    <AssociationSet Name="FK_Experience_CV" Association="Self.FK_Experience_CV">
+    <AssociationSet Name="FK_Experience_CV1" Association="Self.FK_Experience_CV1">
       <End Role="CV" EntitySet="CV" />
+      <End Role="Experience" EntitySet="Experience" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Experience_User" Association="Self.FK_Experience_User">
+      <End Role="User" EntitySet="User" />
       <End Role="Experience" EntitySet="Experience" />
     </AssociationSet>
     <AssociationSet Name="FK_Job_Company" Association="Self.FK_Job_Company">
@@ -321,6 +348,10 @@
     <AssociationSet Name="FK_Seeker_User" Association="Self.FK_Seeker_User">
       <End Role="User" EntitySet="User" />
       <End Role="Seeker" EntitySet="Seeker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_CV" Association="Self.FK_User_CV">
+      <End Role="CV" EntitySet="CV" />
+      <End Role="User" EntitySet="User" />
     </AssociationSet>
     <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
       <End Role="UserRole" EntitySet="UserRole" />

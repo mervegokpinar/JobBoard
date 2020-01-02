@@ -1,79 +1,89 @@
-﻿ @using JobBroad.Models
- @model ResumeViewModel
- @{
+﻿@using JobBroad.Models
+@using Job.Entity
+@model ResumeViewModel
+@{
     ViewBag.Title = "ShowResume";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
 <div class="alice-bg padding-top-60 section-padding-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="candidate-details">
-                    <div class="title-and-info">
-                        <div class="title">
-                            <div class="thumb">
-                                <img src="~/Upload/@Model.Seeker.empPhoto" class="img-fluid" alt="">
-                            </div>
-                            <div class="title-body">
-                                <h4>@Model.Seeker.empName @Model.Seeker.empSurname</h4>
-                                <div class="info">
-                                    <span class="candidate-designation"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-square"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>@Model.Seeker.empMainJob</span>
-                                    <span class="candidate-location"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>@Model.Seeker.empMainLocation</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="download-resume">
-                            <a href="#">Download CV <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
-                        </div>
-                    </div>
-                    
-                    <div class="details-information section-padding-60">
-                        <div class="row">
-                            <div class="col-xl-7 col-lg-8">
-                                <div class="about-details details-section">
-                                    <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-align-left"><line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg>About Me</h4>
-                                    <p>@Model.Seeker.empDetail</p>
-                                </div>
-                                <div class="edication-background details-section">
-                                    <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>Education Background</h4>
-                                    <div class="education-label">
-                                        <span class="study-year">2018 - Present</span>
-                                        <h5>Masters in Software Engineering<span> Engineering University</span></h5>
-                                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-                                    </div>
-                                    <div class="education-label">
-                                        <span class="study-year">2014 - 2018</span>
-                                        <h5>Diploma in Graphics Design<span> Graphic Arts Institute</span></h5>
-                                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-                                    </div>
-                                    <div class="education-label">
-                                        <span class="study-year">2008 - 2014</span>
-                                        <h5>Secondary School Certificate<span>  Engineering High School</span></h5>
-                                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-                                    </div>
-                                </div>
-                                <div class="experience details-section">
-                                    <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>Work Experiance</h4>
-                                    <div class="experience-section">
-                                        <span class="service-year">2016 - Present</span>
-                                        <h5>Lead UI/UX Designer<span> Codepassengers LTD</span></h5>
-                                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-                                    </div>
-                                    <div class="experience-section">
-                                        <span class="service-year">2012 - 2016</span>
-                                        <h5>Former Graphic Designer<span> Graphicreeeo CO</span></h5>
-                                        <p>Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+    @Html.HiddenFor(model => model.CV.CVId)
+    @Html.HiddenFor(model => model.CV.CvName)
+
+      <div class="container">
+          <div class="row">
+              <div class="col">
+                  <div class="candidate-details">
+                      <div class="title-and-info">
+                          <div class="title">
+                              <div class="thumb">
+                                  <img src="~/Upload/@Model.Seeker.empPhoto" class="img-fluid" alt="">
+                              </div>
+                              <div class="title-body">
+                                  <h4>@Model.Seeker.empName @Model.Seeker.empSurname</h4>
+                              </div>
+                          </div>
+                          <div class="download-resume">
+                              <a href="~/Home/ExportPDF/@Model.Seeker.empUserId">Download CV <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
+                          </div>
+                      </div>
+                      <div class="personal-information dashboard-section last-child details-section">
+                          <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>Personal Deatils</h4>
+                          <ul>
+                              <li><span>Candidate's Address:</span>@Model.Seeker.empAddress</li>
+                              <li><span>Candidate's Email:</span>@Model.Seeker.empEmail</li>
+                              <li><span>Date of Birth:</span>@Model.Seeker.empBirthDate</li>
+
+                          </ul>
+                      </div>
+                      <div class="details-information section-padding-60">
+                          <div class="edication-background details-section dashboard-section">
+                              <div class="col-xl-7 col-lg-8">
+                                  <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>Education Background</h4>
+
+                                  @foreach (Education item in Model.EduList)
+                                  {
+                                      <div class="job-summary">
+                                          <div class="experience-section">
+                                              <ul>
+                                                  <li><span style="font-weight:bold">Education Level:</span> @item.EduLevel </li>
+                                                  <li><span style="font-weight:bold">School Name:</span>@item.SchoolName</li>
+                                                  <li><span style="font-weight:bold">Start Date:</span>@item.StartDate</li>
+                                                  <li><span style="font-weight:bold">End Date:</span>@item.EndDate</li>
+                                              </ul>
+                                          </div>
+                                      </div>
+
+                                  }
+                                  <div class="details-information section-padding-60 section-padding-60">
+                                      <h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>Work Experience</h4>
+                                      @foreach (Experience item in Model.WorkList)
+                                      {
+                                          <div class="job-summary">
+                                              <div class="experience-section">
+                                                  <ul>
+                                                      <li><span style="font-weight:bold">Position:</span> >@item.PozitionName </li>
+                                                      <li><span style="font-weight:bold">Company Name:</span>@item.CompName</li>
+                                                      <li><span style="font-weight:bold">Detail:</span>@item.ExpDetail</li>
+                                                      <li><span style="font-weight:bold">Start Date:</span>@item.StartDate</li>
+                                                      <li><span style="font-weight:bold">End Date:</span>@item.EndDate</li>
+                                                  </ul>
+                                              </div>
+                                          </div>
+
+                                      }
+
+                                  </div>
+
+                              </div>
+
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+
 </div>
 

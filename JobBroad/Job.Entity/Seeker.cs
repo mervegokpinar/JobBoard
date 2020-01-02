@@ -18,7 +18,6 @@ namespace Job.Entity
         public Seeker()
         {
             this.C_JobSeeker = new HashSet<C_JobSeeker>();
-            this.CVs = new HashSet<CV>();
         }
     
         public decimal empId { get; set; }
@@ -35,11 +34,9 @@ namespace Job.Entity
         public Nullable<System.DateTime> empBirthDate { get; set; }
         public string empDetail { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<C_JobSeeker> C_JobSeeker { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CV> CVs { get; set; }
         public virtual Location Location { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<C_JobSeeker> C_JobSeeker { get; set; }
     }
 }

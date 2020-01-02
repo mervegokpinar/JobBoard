@@ -26,15 +26,15 @@ namespace Job.Entity
         }
     
         public virtual DbSet<C_JobSeeker> C_JobSeeker { get; set; }
-        public virtual DbSet<CV> CVs { get; set; }
         public virtual DbSet<Education> Educations { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Experience> Experiences { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<JobO> JobOes { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Seeker> Seekers { get; set; }
+        public virtual DbSet<CV> CVs { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
     }
 }

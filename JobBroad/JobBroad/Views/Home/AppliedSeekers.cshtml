@@ -34,50 +34,43 @@
             <div class="col">
                 <div class="job-listing-container">
                     <div class="filtered-job-listing-wrapper">
-                        <div class="job-view-controller-wrapper">
-                            <div class="showing-number">
-                                <span>Showing 1–12 of 28 Jobs</span>
-                            </div>
-                        </div>
-
                         <div class="job-filter-result">
 
-
-                            @foreach (var item in JobModel)
+                            @if (JobModel.Count!=0)
                             {
-                                <div class="job-list">
-                                    <div class="thumb">
-                                       
-                                    </div>
-                                    <div class="body">
-                                        <div class="content">
-                                            <h4><a href="#">@item.Seeker.empName</a></h4>
-                                            
+                               
+                                foreach (var item in JobModel)
+                                {
+                                    <div class="job-list">
+                                        <div class="thumb">
+                                            <img src="~/Upload/@item.Seeker.empPhoto" class="img-fluid" alt="">
+                                        </div>
+                                        <div class="body">
+                                            <div class="content">
+                                                <h4><a href="#">@item.Seeker.empName</a></h4>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <a href="~/Home/ShowResume/@item.Seeker.empUserId" class="button primary-bg btn-block" style="color:#ffffff; min-width:100px; text-align:center">Show CV</a>
+                                      
                                         </div>
                                     </div>
-                                    <div>
-                                        <a href="~/Home/ShowResume/@item.Seeker.empId"> Bu adayın Cv'sini görüntüle</a>
-                                    </div>
-                                </div>
 
+                                }
                             }
+                            else
+                            {
+                                <div>
+                                    <p>There are no candidates applying for this ad.</p>
+                                </div>
+                            }
+
 
                             <div>
 
                             </div>
                         </div>
-                        <div class="pagination-list text-center">
-                            <nav class="navigation pagination">
-                                <div class="nav-links">
-                                    <a class="prev page-numbers" href="#"><i class="fas fa-angle-left"></i></a>
-                                    <a class="page-numbers" href="#">1</a>
-                                    <span aria-current="page" class="page-numbers current">2</span>
-                                    <a class="page-numbers" href="#">3</a>
-                                    <a class="page-numbers" href="#">4</a>
-                                    <a class="next page-numbers" href="#"><i class="fas fa-angle-right"></i></a>
-                                </div>
-                            </nav>
-                        </div>
+
                     </div>
 
                 </div>
@@ -85,6 +78,5 @@
         </div>
     </div>
 </div>
-
 
 

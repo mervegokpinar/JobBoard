@@ -14,12 +14,6 @@ namespace Job.Entity
     
     public partial class Education
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Education()
-        {
-            this.CVs = new HashSet<CV>();
-        }
-    
         public decimal EduId { get; set; }
         public string EduLevel { get; set; }
         public string SchoolName { get; set; }
@@ -29,7 +23,7 @@ namespace Job.Entity
         public Nullable<decimal> CvId { get; set; }
         public Nullable<decimal> UserId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CV> CVs { get; set; }
+        public virtual User User { get; set; }
+        public virtual CV CV { get; set; }
     }
 }

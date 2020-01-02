@@ -23,8 +23,8 @@ namespace Job.Entity
         public string JobPhoto { get; set; }
         public Nullable<decimal> UserId { get; set; }
     
-        public virtual Company Company { get; set; }
         public virtual Location Location { get; set; }
         public virtual User User { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

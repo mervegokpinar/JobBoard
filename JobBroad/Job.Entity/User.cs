@@ -17,9 +17,11 @@ namespace Job.Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Companies = new HashSet<Company>();
             this.Seekers = new HashSet<Seeker>();
             this.JobOes = new HashSet<JobO>();
+            this.Educations = new HashSet<Education>();
+            this.Experiences = new HashSet<Experience>();
+            this.Companies = new HashSet<Company>();
         }
     
         public decimal userId { get; set; }
@@ -29,13 +31,19 @@ namespace Job.Entity
         public Nullable<decimal> userRoleId { get; set; }
         public string userPhoto { get; set; }
         public string userSurname { get; set; }
+        public Nullable<decimal> userCVID { get; set; }
     
         public virtual UserRole UserRole { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Company> Companies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Seeker> Seekers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JobO> JobOes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Education> Educations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Experience> Experiences { get; set; }
+        public virtual CV CV { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Company> Companies { get; set; }
     }
 }

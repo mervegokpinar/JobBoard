@@ -16,6 +16,7 @@ namespace JobBroad.Models
         public IEnumerable<SelectListItem> LocationList { get; set; }
         public List<Education> EduList { get; set; }
         public List<Experience> WorkList { get; set; }
-        public CV cv { get; set; }
+        public User User { get; set; }
+        public CV CV { get; set; }
     }
 }

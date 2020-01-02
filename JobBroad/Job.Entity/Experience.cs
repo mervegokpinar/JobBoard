@@ -14,12 +14,6 @@ namespace Job.Entity
     
     public partial class Experience
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Experience()
-        {
-            this.CVs = new HashSet<CV>();
-        }
-    
         public decimal ExpId { get; set; }
         public string CompName { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
@@ -29,8 +23,7 @@ namespace Job.Entity
         public Nullable<decimal> CvID { get; set; }
         public Nullable<decimal> UserId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CV> CVs { get; set; }
+        public virtual User User { get; set; }
         public virtual CV CV { get; set; }
     }
 }
